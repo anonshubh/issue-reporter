@@ -1,8 +1,9 @@
 from allauth.account.forms import SignupForm
-
-from .models import UserInfo , Institute
+from django import forms
 
 class CustomSignupForm(SignupForm):
+    first_name = forms.CharField(max_length=30, label='First Name') 
+    last_name = forms.CharField(max_length=30, label='Last Name')
 
     def save(self, request):
 
@@ -11,22 +12,16 @@ class CustomSignupForm(SignupForm):
         user = super(CustomSignupForm, self).save(request)
 
         email = str(user.email)
+        index = email.find('@')
+        dot = email.find('.')
         rollno = ""
         for i in email:
             if(i=='@'):
                 break
             rollno+=i
         user.username = rollno
+        user.first_name = self.cleaned_data['first_name'] 
+        user.last_name = self.cleaned_data['last_name']
         user.save()
-        college = ""
-        index = email.find('@')
-        dot = email.find('.')
-        college = email[index+1:dot]
-        if(college == 'iiitdm'):
-            inst_obj,created = Institute.objects.get_or_create(name='Indian Institute of Information Technology, Kancheepuram')
-            department = rollno[:3]
-            year = rollno[3:5]
-            year_ = "20"+year
-        user_obj = UserInfo.objects.create(user=user,institute=inst_obj,department=department,join_year=year_)
 
         return user
