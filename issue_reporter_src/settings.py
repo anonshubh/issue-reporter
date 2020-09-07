@@ -55,15 +55,15 @@ AUTH_USER_MODEL = 'profiles.User'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
-
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-
 ACCOUNT_SESSION_REMEMBER = True
 
 ACCOUNT_FORMS = {'signup': 'profiles.forms.CustomSignupForm'}
 
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
+
+ACCOUNT_ADAPTER = 'profiles.forms.RestrictEmailAdapter'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 

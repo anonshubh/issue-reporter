@@ -1,5 +1,7 @@
 from allauth.account.forms import SignupForm
 from django import forms
+from allauth.account.adapter import DefaultAccountAdapter 
+from django.forms import ValidationError 
 
 class CustomSignupForm(SignupForm):
     first_name = forms.CharField(max_length=30, label='First Name') 
@@ -25,3 +27,14 @@ class CustomSignupForm(SignupForm):
         user.save()
 
         return user
+
+class RestrictEmailAdapter(DefaultAccountAdapter): 
+    def clean_email(self, email): 
+        RestrictedList = [] #List will include Restricted Emails 
+        if email in RestrictedList: 
+            raise ValidationError('You are restricted from registering!')
+        index = email.find('@')
+        dot = email.find('.')
+        if(email[index+1:dot]=='gmail'):
+            raise ValidationError("Use only Official Institute Email ID!")
+        return email 

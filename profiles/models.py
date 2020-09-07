@@ -40,5 +40,5 @@ def user_info_creation(request,email_address,**kwargs):
         department = email[:3]
         year = email[3:5]
         year_ = "20"+year
-    #Addition or selection of another Institute would be in 'else' clause 
+    #Addition or selection of another Institute will be in 'else' clause 
     user_obj = UserInfo.objects.create(user=user,institute=inst_obj,department=department,join_year=year_)
