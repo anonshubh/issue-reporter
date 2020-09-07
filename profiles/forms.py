@@ -1,7 +1,9 @@
 from allauth.account.forms import SignupForm
 from django import forms
 from allauth.account.adapter import DefaultAccountAdapter 
-from django.forms import ValidationError 
+from django.forms import ValidationError
+
+from .models import Institute
 
 class CustomSignupForm(SignupForm):
     first_name = forms.CharField(max_length=30, label='First Name') 
@@ -35,6 +37,13 @@ class RestrictEmailAdapter(DefaultAccountAdapter):
             raise ValidationError('You are restricted from registering!')
         index = email.find('@')
         dot = email.find('.')
-        if(email[index+1:dot]=='gmail'):
+        domain = email[index+1:dot]
+        if(domain=='gmail'):
             raise ValidationError("Use only Official Institute Email ID!")
-        return email 
+        domain_qs = Institute.objects.filter(domain=domain)
+        print(domain_qs)
+        if(domain_qs.exists()):
+            domain_obj = domain_qs.first().domain
+            if(domain == domain_obj):
+                return email
+        raise ValidationError("Currently, No Service available for this Institute, Contact Site Administrator!")

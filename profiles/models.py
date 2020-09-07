@@ -12,9 +12,10 @@ class User(AbstractUser):
 
 class Institute(models.Model):
     name = models.CharField(max_length =56)
+    domain = models.CharField(max_length=7)
 
     def __str__(self):
-        return self.name
+        return self.domain
 
 class UserInfo(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='info')
@@ -22,6 +23,7 @@ class UserInfo(models.Model):
     department = models.CharField(max_length=3)
     join_year = models.CharField(max_length=4)
     institute = models.ForeignKey(Institute,on_delete=models.CASCADE,related_name='allusers')
+    registered_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.user.username
@@ -33,10 +35,9 @@ def user_info_creation(request,email_address,**kwargs):
     email = user.email
     index = email.find('@')
     dot = email.find('.')
-    college = ""
-    college = email[index+1:dot]
-    if(college == 'iiitdm'):
-        inst_obj,created = Institute.objects.get_or_create(name='Indian Institute of Information Technology, Kancheepuram')
+    domain = email[index+1:dot]
+    if(domain == 'iiitdm'):
+        inst_obj = Institute.objects.get(domain=domain)
         department = email[:3]
         year = email[3:5]
         year_ = "20"+year
