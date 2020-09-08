@@ -3,7 +3,7 @@
 {% block content %}
 
 {% if request.user.is_authenticated %}
-    <h4>Department: {{request.user.info.department|upper}}</h4>
+    <h4>Department: {{request.user.info.department|upper}} {{request.user.info.join_year}}</h4>
     <a href="{% url 'reporter:index' %}">Back to Active List</a>
     <hr>
     {% for issue in issue_list %}

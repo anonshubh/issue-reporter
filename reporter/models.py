@@ -7,6 +7,7 @@ class Report(models.Model):
     user = models.ForeignKey(UserInfo,on_delete=models.CASCADE,blank=True)
     content = models.TextField('Issue')
     department = models.CharField(max_length=3,blank=True)
+    year = models.CharField(max_length=4,blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)

@@ -9,12 +9,12 @@ from profiles.models import UserInfo
 def index_view(request):
     qs = []
     if request.user.is_authenticated:
-        qs = Report.objects.filter(active=True,department=request.user.info.department)
+        qs = Report.objects.filter(active=True,department=request.user.info.department,year=request.user.info.join_year)
     return render(request,'reporter/index.html',{'issue_list':qs})
 
 @login_required
 def archive_view(request):
-    qs = Report.objects.filter(active=False,department=request.user.info.department)
+    qs = Report.objects.filter(active=False,department=request.user.info.department,year=request.user.info.join_year)
     return render(request,'reporter/archived.html',{'issue_list':qs})
 
 @login_required
@@ -27,14 +27,15 @@ def issue_form_view(request):
             user_obj = UserInfo.objects.get(user=request.user)
             instance.user = user_obj
             instance.department = request.user.info.department
+            instance.year = request.user.info.join_year
             instance.save()
             return redirect('reporter:index')
     return render(request,'reporter/issue-form.html',{'form':form})
 
 @login_required
 def close_issue_view(request,pk):
-    if(request.user.info.is_cr):
-        obj = get_object_or_404(Report,id=pk)
+    obj = get_object_or_404(Report,id=pk)
+    if(request.user.info.is_cr and request.user.info.department == obj.department and request.user.info.join_year == obj.year):
         if(obj.active):
             obj.active = False
         else:
@@ -46,7 +47,7 @@ def close_issue_view(request,pk):
 @login_required
 def delete_issue_view(request,pk):
     obj = get_object_or_404(Report,id=pk)
-    if(request.user.info.is_cr or request.user == obj.user.user):
+    if((request.user.info.is_cr and request.user.info.department == obj.department and request.user.info.join_year == obj.year) or (request.user == obj.user.user)):
         obj.delete()
         return redirect('reporter:index')
     return HttpResponseForbidden
