@@ -10,12 +10,12 @@ def index_view(request):
     qs = []
     if request.user.is_authenticated:
         qs = Report.objects.filter(active=True,department=request.user.info.department)
-    return render(request,'profiles/index.html',{'issue_list':qs})
+    return render(request,'reporter/index.html',{'issue_list':qs})
 
 @login_required
 def archive_view(request):
     qs = Report.objects.filter(active=False,department=request.user.info.department)
-    return render(request,'profiles/archived.html',{'issue_list':qs})
+    return render(request,'reporter/archived.html',{'issue_list':qs})
 
 @login_required
 def issue_form_view(request):
@@ -29,7 +29,7 @@ def issue_form_view(request):
             instance.department = request.user.info.department
             instance.save()
             return redirect('reporter:index')
-    return render(request,'profiles/issue-form.html',{'form':form})
+    return render(request,'reporter/issue-form.html',{'form':form})
 
 @login_required
 def close_issue_view(request,pk):
@@ -49,5 +49,18 @@ def delete_issue_view(request,pk):
         obj = get_object_or_404(Report,id=pk)
         obj.delete()
         return redirect('reporter:index')
+    return HttpResponseForbidden
+
+@login_required
+def edit_issue_view(request,pk):
+    obj = get_object_or_404(Report,id=pk)
+    form = ReportForm(instance=obj)
+    if(request.user==obj.user.user):
+        if(request.method=='POST'):
+            form = ReportForm(request.POST,instance=obj)
+            if(form.is_valid()):
+                form.save()
+            return redirect('reporter:index')
+        return render(request,'reporter/edit-issue.html',{'form':form,'issue':obj})
     return HttpResponseForbidden
 
