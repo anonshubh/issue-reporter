@@ -41,7 +41,6 @@ class RestrictEmailAdapter(DefaultAccountAdapter):
         if(domain=='gmail'):
             raise ValidationError("Use only Official Institute Email ID!")
         domain_qs = Institute.objects.filter(domain=domain)
-        print(domain_qs)
         if(domain_qs.exists()):
             domain_obj = domain_qs.first().domain
             if(domain == domain_obj):

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div>
+    <form action="{% url 'reporter:issue-form' %}" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input class="btn btn-primary" type="submit" value="Save">
+    </form>
+    
+</div>
+    
+{% endblock %}
