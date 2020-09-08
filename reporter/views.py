@@ -45,8 +45,8 @@ def close_issue_view(request,pk):
 
 @login_required
 def delete_issue_view(request,pk):
-    if(request.user.info.is_cr):
-        obj = get_object_or_404(Report,id=pk)
+    obj = get_object_or_404(Report,id=pk)
+    if(request.user.info.is_cr or request.user == obj.user.user):
         obj.delete()
         return redirect('reporter:index')
     return HttpResponseForbidden

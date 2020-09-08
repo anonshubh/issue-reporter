@@ -6,19 +6,22 @@
     <h2>A Boon For Cr's, (seriously, it's just a Reddit-Clone)</h2>
     {% if request.user.is_authenticated %}
     <h4>Department: {{request.user.info.department|upper}}</h4>
+    <h3>Welcome, {{request.user.first_name}} {{request.user.last_name}}</h3>
     <div class="container">
         <a class="mr-3" href="{% url 'reporter:issue-form' %}">Add New Issue</a>
         <a href="{% url 'reporter:archived' %}">Resolved</a>
     </div>
     <hr>
+
     {% for issue in issue_list %}
     <div class="card border-primary mb-3" style="max-width: 45rem;">
-        <div class="card-header">{{issue.user.user.first_name}} ({{issue.user.user.username}}) {% if request.user == issue.user.user %}{% if issue.user.is_cr %}<strong>(CR)</strong>{% endif %} <a href="{% url 'reporter:edit' issue.id %}">Edit +</a>{% endif %} {% if request.user.info.is_cr %}<a class="btn btn-danger" href="{% url 'reporter:delete' issue.id %}">X</a> <a class="btn btn-success ml-2" href="{% url 'reporter:close' issue.id %}">Close</a> {% endif %}</div>
+        <div class="card-header">{{issue.user.user.first_name}} ({{issue.user.user.username}}) {% if issue.user.is_cr %}<strong>(CR)</strong>{% endif %}{% if request.user == issue.user.user %} <a href="{% url 'reporter:edit' issue.id %}">Edit +</a>{% endif %} {% if request.user.info.is_cr or request.user == issue.user.user %}<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">X</button> <a class="btn btn-success ml-2" href="{% url 'reporter:close' issue.id %}">Close</a> {% endif %}</div>
         <div class="card-body text-primary">
           <h5 class="card-title">{{issue.content}}</h5>
           <p class="card-text">Posted on: {{issue.timestamp}}</p>
         </div>
     </div>
+    {% include 'reporter/modal_.html' with id=issue.id %}
     {% empty %}
     <p class="lead">Woohoo, No Active Issues!</p>
     {% endfor %}
@@ -26,5 +29,4 @@
     <p class="">Log In to Report Issues!</p>
     {% endif %}
 </div>
-
 {% endblock %}
