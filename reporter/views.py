@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseForbidden
 
 from .models import Report
 from .forms import ReportForm
@@ -30,13 +31,23 @@ def issue_form_view(request):
             return redirect('reporter:index')
     return render(request,'profiles/issue-form.html',{'form':form})
 
-
+@login_required
 def close_issue_view(request,pk):
-    obj = get_object_or_404(Report,id=pk)
-    if(obj.active):
-        obj.active = False
-    else:
-        obj.active = True
-    obj.save()
-    return redirect('reporter:index')
+    if(request.user.info.is_cr):
+        obj = get_object_or_404(Report,id=pk)
+        if(obj.active):
+            obj.active = False
+        else:
+            obj.active = True
+        obj.save()
+        return redirect('reporter:index')
+    return HttpResponseForbidden
+
+@login_required
+def delete_issue_view(request,pk):
+    if(request.user.info.is_cr):
+        obj = get_object_or_404(Report,id=pk)
+        obj.delete()
+        return redirect('reporter:index')
+    return HttpResponseForbidden
 
