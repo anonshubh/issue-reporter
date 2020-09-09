@@ -1,8 +1,10 @@
 .upvote{
+    display: none;
     color: green;
 }
 
 .downvote{
+    display: none;
     color: red;
 }
 

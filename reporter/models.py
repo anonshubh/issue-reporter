@@ -15,7 +15,16 @@ class Report(models.Model):
     downvotes = models.IntegerField(default=0)
 
     def __str__(self):
-        return f'By {self.user.user.username}'
+        return f'By {self.user.user.username} ({self.content[:50]})'
     
     class Meta:
         ordering = ['-updated','-timestamp']
+
+
+class Vote(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    issue = models.ForeignKey(Report,related_name='votes',on_delete=models.CASCADE)
+    type = models.IntegerField(default=-1)
+
+    def __str__(self):
+        return f"Vote By {self.user.username} On '{self.issue.content[:50]}'"

@@ -20,7 +20,7 @@
           <h5 class="card-title">{{issue.content}}</h5>
           <p class="card-text">Posted on: {{issue.timestamp}}</p>
         </div>
-        <div>
+        <div class="vote" data-id="{{issue.id}}">
             <button data-id="{{issue.id}}" class="upvote btn btn-link">Upvote</button>
             <button data-id="{{issue.id}}" class="downvote btn btn-link">Downvote</button>
             <button data-id="{{issue.id}}" class="upvoted btn btn-link">Upvoted</button>

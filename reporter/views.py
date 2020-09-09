@@ -1,8 +1,9 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden , HttpResponseNotAllowed,JsonResponse,HttpResponseServerError
+import json
 
-from .models import Report
+from .models import Report , Vote
 from .forms import ReportForm
 from profiles.models import UserInfo
 
@@ -66,5 +67,48 @@ def edit_issue_view(request,pk):
     return HttpResponseForbidden
 
 @login_required
-def vote_view(request):
-    pass
+def vote_update_view(request):
+    if request.method == 'POST':
+        data_ = json.loads(request.body)
+        id_ = data_['id']
+        type = data_['type']
+        try:
+            report_obj = Report.objects.get(id=id_)
+            vote_obj,created = Vote.objects.get_or_create(user=request.user,issue=report_obj)
+        except:
+            raise HttpResponseServerError
+        if(type=='upvote'):
+            (report_obj.upvotes)+=1
+            vote_obj.type = 1
+        elif(type=='downvote'):
+            (report_obj.downvotes)-=1
+            vote_obj.type = 0
+        elif(type=='downvoted'):
+            (report_obj.downvotes)+=1
+            vote_obj.type = -1
+        elif(type=='upvoted'):
+            (report_obj.upvotes)-=1
+            vote_obj.type = -1
+        report_obj.save()
+        vote_obj.save()
+        return JsonResponse({'Success':'Voted'})
+    return HttpResponseNotAllowed
+
+
+@login_required
+def vote_get_view(request):
+    if request.method == 'POST':
+        data_ = json.loads(request.body)
+        id_ = data_['id']
+        report_obj = Report.objects.get(id=id_)
+        data = {}
+        obj,created = Vote.objects.get_or_create(user=request.user,issue=report_obj)
+        type_ = obj.type
+        if(type_ == 1):
+            data = {'type':'upvoted'}
+        elif(type_ == 0):
+            data = {'type':'downvoted'}
+        elif(type_ == -1):
+            data = {'type':'none'}
+        return JsonResponse(data)
+    return HttpResponseNotAllowed

@@ -12,5 +12,6 @@ urlpatterns=[
     path('edit/<int:pk>/',views.edit_issue_view,name='edit'),
     
     #API EndPoints
-    path('vote/',views.vote_view,name='vote'),
+    path('update-vote/',views.vote_update_view,name='vote-update'),
+    path('get-vote/',views.vote_get_view,name='vote-get'),
 ]

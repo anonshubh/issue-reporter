@@ -1,8 +1,38 @@
 document.addEventListener("DOMContentLoaded",()=>{
+    document.querySelectorAll('.vote').forEach((div)=>{
+        let id_ = div.dataset.id;
+        const data_ = {id:id_};
+        const csrftoken = getCookie('csrftoken');
+        let child = div.childNodes; 
+        fetch('/get-vote/',{
+            method: "POST",
+            headers:{
+                'Content-Type': 'application/json',
+                "X-CSRFToken": csrftoken
+            },
+            body: JSON.stringify(data_),
+        })
+        .then(response => response.json())
+        .then(data=>{
+            const type = data.type;
+            if(type=='none'){
+                child[1].style.display = 'inline-block';
+                child[3].style.display = 'inline-block';
+            }
+            else if(type=='upvoted'){
+                child[5].style.display = 'inline-block';
+            }
+            else if(type=='downvoted'){
+                child[7].style.display = 'inline-block';
+            }
+        })
+    });
+
     document.querySelectorAll('.upvote').forEach((button)=>{
         button.onclick = () => {
             let id_ = button.dataset.id;
-            // async call - todo
+            const data_ = {id:id_,type:'upvote'};
+            voteUpdateApiCall(data_);
             let children = button.parentNode.childNodes;
             children[1].style.display = 'none';
             children[3].style.display = 'none';
@@ -12,7 +42,8 @@ document.addEventListener("DOMContentLoaded",()=>{
     document.querySelectorAll('.downvote').forEach((button)=>{
         button.onclick = () => {
             let id_ = button.dataset.id;
-            // async call - todo
+            const data_ = {id:id_,type:'downvote'};
+            voteUpdateApiCall(data_);
             let children = button.parentNode.childNodes;
             children[1].style.display = 'none';
             children[3].style.display = 'none';
@@ -22,7 +53,8 @@ document.addEventListener("DOMContentLoaded",()=>{
     document.querySelectorAll('.upvoted').forEach((button)=>{
         button.onclick = () => {
             let id_ = button.dataset.id;
-            // async call - todo
+            const data_ = {id:id_,type:'upvoted'};
+            voteUpdateApiCall(data_);
             let children = button.parentNode.childNodes;
             children[1].style.display = 'inline-block';
             children[3].style.display = 'inline-block';
@@ -32,7 +64,8 @@ document.addEventListener("DOMContentLoaded",()=>{
     document.querySelectorAll('.downvoted').forEach((button)=>{
         button.onclick = () => {
             let id_ = button.dataset.id;
-            // async call - todo
+            const data_ = {id:id_,type:'downvoted'};
+            voteUpdateApiCall(data_);
             let children = button.parentNode.childNodes;
             children[1].style.display = 'inline-block';
             children[3].style.display = 'inline-block';
@@ -40,3 +73,37 @@ document.addEventListener("DOMContentLoaded",()=>{
         }
     });
 });
+
+
+function voteUpdateApiCall(data_){
+    const csrftoken = getCookie('csrftoken');
+    fetch('/update-vote/',{
+        method: "POST",
+        headers:{
+            'Content-Type': 'application/json',
+            "X-CSRFToken": csrftoken
+        },
+        body: JSON.stringify(data_),
+    })
+    .then(response => response.json())
+    .then(data=>{
+        console.log(data);
+    })
+}
+
+// Ref: https://docs.djangoproject.com/en/3.1/ref/csrf/
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
