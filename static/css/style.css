@@ -1,0 +1,18 @@
+.upvote{
+    color: green;
+}
+
+.downvote{
+    color: red;
+}
+
+.upvoted{
+    display: none;
+    color: green;
+    
+}
+
+.downvoted{
+    display: none;
+    color: red;
+}

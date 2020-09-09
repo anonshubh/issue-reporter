@@ -10,4 +10,7 @@ urlpatterns=[
     path('close/<int:pk>/',views.close_issue_view,name='close'),
     path('delete/<int:pk>/',views.delete_issue_view,name='delete'),
     path('edit/<int:pk>/',views.edit_issue_view,name='edit'),
+    
+    #API EndPoints
+    path('vote/',views.vote_view,name='vote'),
 ]

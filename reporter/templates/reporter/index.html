@@ -20,6 +20,12 @@
           <h5 class="card-title">{{issue.content}}</h5>
           <p class="card-text">Posted on: {{issue.timestamp}}</p>
         </div>
+        <div>
+            <button data-id="{{issue.id}}" class="upvote btn btn-link">Upvote</button>
+            <button data-id="{{issue.id}}" class="downvote btn btn-link">Downvote</button>
+            <button data-id="{{issue.id}}" class="upvoted btn btn-link">Upvoted</button>
+            <button data-id="{{issue.id}}" class="downvoted btn btn-link">Downvoted</button>
+        </div>
     </div>
     {% include 'reporter/modal_.html' with id=issue.id %}
     {% empty %}

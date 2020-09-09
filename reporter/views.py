@@ -65,3 +65,6 @@ def edit_issue_view(request,pk):
         return render(request,'reporter/edit-issue.html',{'form':form,'issue':obj})
     return HttpResponseForbidden
 
+@login_required
+def vote_view(request):
+    pass
