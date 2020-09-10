@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseForbidden , HttpResponseNotAllowed,JsonResponse,HttpResponseServerError
+from django.http import HttpResponseForbidden ,HttpResponseNotAllowed,JsonResponse,HttpResponseServerError
 import json
 
 from .models import Report , Vote
@@ -10,13 +10,46 @@ from profiles.models import UserInfo
 def index_view(request):
     qs = []
     if request.user.is_authenticated:
-        qs = Report.objects.filter(active=True,department=request.user.info.department,year=request.user.info.join_year)
+        qs = Report.objects.filter(active=True,department=request.user.info.department,year=request.user.info.join_year,resolved=False)
     return render(request,'reporter/index.html',{'issue_list':qs})
 
 @login_required
-def archive_view(request):
-    qs = Report.objects.filter(active=False,department=request.user.info.department,year=request.user.info.join_year)
-    return render(request,'reporter/archived.html',{'issue_list':qs})
+def resolved_view(request):
+    qs = Report.objects.filter(active=False,department=request.user.info.department,year=request.user.info.join_year,resolved=True)
+    return render(request,'reporter/resolved.html',{'issue_list':qs})
+
+@login_required
+def close_issue_view(request,pk):
+    obj = get_object_or_404(Report,id=pk)
+    if(request.user.info.is_cr and request.user.info.department == obj.department and request.user.info.join_year == obj.year):
+        if(obj.active):
+            obj.active = False
+        else:
+            obj.active = True
+        obj.save()
+        return redirect('reporter:close-stage')
+    return HttpResponseForbidden
+
+
+@login_required
+def close_view(request):
+    if(request.method=='POST'):
+        id_ = int(request.POST.get('id',None))
+        resolve_message = request.POST.get('c-line',None)
+        obj = Report.objects.get(id=id_)
+        obj.cr_line = resolve_message
+        obj.save()
+    qs = Report.objects.filter(active=False,department=request.user.info.department,year=request.user.info.join_year,resolved=False)
+    return render(request,'reporter/closed.html',{'issue_list':qs})
+
+
+@login_required
+def delete_resolve_line_view(request,pk):
+    obj = Report.objects.get(id=pk)
+    obj.cr_line = None
+    obj.save()
+    return redirect('reporter:close-stage')
+
 
 @login_required
 def issue_form_view(request):
@@ -34,15 +67,12 @@ def issue_form_view(request):
     return render(request,'reporter/issue-form.html',{'form':form})
 
 @login_required
-def close_issue_view(request,pk):
+def resolve_issue_view(request,pk):
     obj = get_object_or_404(Report,id=pk)
     if(request.user.info.is_cr and request.user.info.department == obj.department and request.user.info.join_year == obj.year):
-        if(obj.active):
-            obj.active = False
-        else:
-            obj.active = True
+        obj.resolved = True
         obj.save()
-        return redirect('reporter:index')
+        return redirect('reporter:resolved')
     return HttpResponseForbidden
 
 @login_required

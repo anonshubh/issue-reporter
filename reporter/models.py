@@ -11,6 +11,8 @@ class Report(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
+    resolved = models.BooleanField(default=False)
+    cr_line = models.CharField(max_length=256,null=True,blank=True)
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
 
@@ -18,7 +20,7 @@ class Report(models.Model):
         return f'By {self.user.user.username} ({self.content[:50]})'
     
     class Meta:
-        ordering = ['-updated','-timestamp']
+        ordering = ['-timestamp']
 
 
 class Vote(models.Model):
