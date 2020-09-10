@@ -33,14 +33,16 @@ def close_issue_view(request,pk):
 
 @login_required
 def close_view(request):
-    if(request.method=='POST'):
-        id_ = int(request.POST.get('id',None))
-        resolve_message = request.POST.get('c-line',None)
-        obj = Report.objects.get(id=id_)
-        obj.cr_line = resolve_message
-        obj.save()
-    qs = Report.objects.filter(active=False,department=request.user.info.department,year=request.user.info.join_year,resolved=False)
-    return render(request,'reporter/closed.html',{'issue_list':qs})
+    if(request.user.info.is_cr):
+        if(request.method=='POST'):
+            id_ = int(request.POST.get('id',None))
+            resolve_message = request.POST.get('c-line',None)
+            obj = Report.objects.get(id=id_)
+            obj.cr_line = resolve_message
+            obj.save()
+        qs = Report.objects.filter(active=False,department=request.user.info.department,year=request.user.info.join_year,resolved=False)
+        return render(request,'reporter/closed.html',{'issue_list':qs})
+    return HttpResponseForbidden
 
 
 @login_required
@@ -78,22 +80,24 @@ def resolve_issue_view(request,pk):
 @login_required
 def delete_issue_view(request,pk):
     obj = get_object_or_404(Report,id=pk)
-    if((request.user.info.is_cr and request.user.info.department == obj.department and request.user.info.join_year == obj.year) or (request.user == obj.user.user)):
-        obj.delete()
-        return redirect('reporter:index')
+    if((obj.active == True and obj.resolved == False) or (request.user.info.is_cr)):
+        if((request.user.info.is_cr and request.user.info.department == obj.department and request.user.info.join_year == obj.year) or (request.user == obj.user.user)):
+            obj.delete()
+            return redirect('reporter:index')
     return HttpResponseForbidden
 
 @login_required
 def edit_issue_view(request,pk):
     obj = get_object_or_404(Report,id=pk)
-    form = ReportForm(instance=obj)
-    if(request.user==obj.user.user):
-        if(request.method=='POST'):
-            form = ReportForm(request.POST,instance=obj)
-            if(form.is_valid()):
-                form.save()
-            return redirect('reporter:index')
-        return render(request,'reporter/edit-issue.html',{'form':form,'issue':obj})
+    if(obj.active == True and obj.resolved == False):
+        form = ReportForm(instance=obj)
+        if(request.user==obj.user.user):
+            if(request.method=='POST'):
+                form = ReportForm(request.POST,instance=obj)
+                if(form.is_valid()):
+                    form.save()
+                return redirect('reporter:index')
+            return render(request,'reporter/edit-issue.html',{'form':form,'issue':obj})
     return HttpResponseForbidden
 
 @login_required
@@ -107,21 +111,22 @@ def vote_update_view(request):
             vote_obj,created = Vote.objects.get_or_create(user=request.user,issue=report_obj)
         except:
             raise HttpResponseServerError
-        if(type=='upvote'):
-            (report_obj.upvotes)+=1
-            vote_obj.type = 1
-        elif(type=='downvote'):
-            (report_obj.downvotes)-=1
-            vote_obj.type = 0
-        elif(type=='downvoted'):
-            (report_obj.downvotes)+=1
-            vote_obj.type = -1
-        elif(type=='upvoted'):
-            (report_obj.upvotes)-=1
-            vote_obj.type = -1
-        report_obj.save()
-        vote_obj.save()
-        return JsonResponse({'Success':'Voted'})
+        if(report_obj.active == True and report_obj.resolved == False):
+            if(type=='upvote'):
+                (report_obj.upvotes)+=1
+                vote_obj.type = 1
+            elif(type=='downvote'):
+                (report_obj.downvotes)-=1
+                vote_obj.type = 0
+            elif(type=='downvoted'):
+                (report_obj.downvotes)+=1
+                vote_obj.type = -1
+            elif(type=='upvoted'):
+                (report_obj.upvotes)-=1
+                vote_obj.type = -1
+            report_obj.save()
+            vote_obj.save()
+            return JsonResponse({'Success':'Voted'})
     return HttpResponseNotAllowed
 
 

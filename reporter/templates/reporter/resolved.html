@@ -13,7 +13,11 @@
         <div class="card-body text-primary">
           <h5 class="card-title">{{issue.content}}</h5>
           <p class="card-text">Resolved on: {{issue.updated}}</p>
-          <p class="card-text">{{issue.cr_line}}</p>
+          <p class="card-text resolve-message"><em>Resolved Message: </em><span style="color: black;">{{issue.cr_line}}</span></p>
+        </div>
+        <div class="results ml-2">
+            <p>Upvotes: {{issue.upvotes}}</p>
+            <p>Downvotes: {{issue.downvotes}}</p>
         </div>
     </div>
     {% include 'reporter/modal_.html' with id=issue.id %}
