@@ -2,17 +2,19 @@ from django.shortcuts import render,redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseNotAllowed,JsonResponse,HttpResponseServerError
 from django.core.exceptions import PermissionDenied
-import json
+from django.contrib import messages
+import json, datetime, pytz
 
 from .models import Report , Vote
-from .forms import ReportForm
+from .forms import ReportForm , DeadlineForm
 from profiles.models import UserInfo
 
 def index_view(request):
     qs = []
+    form = DeadlineForm()
     if request.user.is_authenticated:
         qs = Report.objects.filter(active=True,department=request.user.info.department,year=request.user.info.join_year,resolved=False)
-    return render(request,'reporter/index.html',{'issue_list':qs})
+    return render(request,'reporter/index.html',{'issue_list':qs,'form':form})
 
 @login_required
 def resolved_view(request):
@@ -181,3 +183,33 @@ def voted_list_view(request):
             )
         return render(request,'reporter/voted-list.html',{'object_list':context})
     raise PermissionDenied
+
+
+@login_required
+def deadline_add_view(request):
+    id_ = int(request.POST.get('id',None))
+    form = DeadlineForm(request.POST)
+    if(form.is_valid()):
+        deadline = form.cleaned_data['deadline']
+        live = datetime.datetime.now(pytz.timezone('Asia/Kolkata'))
+        if((live.date()==deadline.date() and live.time()<deadline.time()) or(live.date()<deadline.date())):
+            report_obj = get_object_or_404(Report,id=id_)
+            if((report_obj.active == True and report_obj.resolved == False) or (request.user.info.is_cr)):
+                if((request.user.info.is_cr and request.user.info.department == report_obj.department and request.user.info.join_year == report_obj.year)):
+                    report_obj.deadline = deadline
+                    report_obj.save()
+        else:
+            messages.error(request,'Deadline Must Be Higher than Current Time!')
+    else:
+        messages.error(request,'Invalid-Datetime')
+    return redirect("reporter:index")
+
+
+@login_required
+def deadline_remove_view(request,pk):
+    report_obj = get_object_or_404(Report,id=pk)
+    if((report_obj.active == True and report_obj.resolved == False) or (request.user.info.is_cr)):
+        if((request.user.info.is_cr and request.user.info.department == report_obj.department and request.user.info.join_year == report_obj.year)):
+            report_obj.deadline = None
+            report_obj.save()
+    return redirect("reporter:index")

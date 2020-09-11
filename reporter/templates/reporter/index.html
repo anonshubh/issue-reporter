@@ -12,7 +12,7 @@
         <a class="mx-2" href="{% url 'reporter:resolved' %}">Resolved</a>
         {% if request.user.info.is_cr %}
         <a href="{% url 'reporter:close-stage' %}">Closed</a>
-        <a class="ml-2 btn btn-secondary" href="{% url 'reporter:voted-list' %}">Voting Data</a>
+        <a class="ml-2 btn btn-secondary btn-sm" href="{% url 'reporter:voted-list' %}">Voting Data</a>
         {% endif %}
     </div>
     <hr>
@@ -34,6 +34,23 @@
                 <span>DownVotes: {{issue.downvotes}}</span>
             {% endif %} -->
         </div>
+        {% if issue.deadline %}
+            <p class="deadline-date ml-2"><em>Deadline: </em>{{issue.deadline}}</p>
+            {% if request.user.info.is_cr %}
+            <p class="ml-3"><a class="btn btn-danger btn-sm" href="{% url 'reporter:remove-deadline' issue.id %}">Remove Deadline</a></p>
+            {% endif %}
+        {% else %}
+            {% if request.user.info.is_cr %}
+                <div class=" ml-2 mt-2 pb-3 deadline">
+                    <form action="{% url 'reporter:add-deadline' %}" method="post">
+                        {% csrf_token %}
+                        {{form}}
+                        <input type="hidden" name="id" value="{{issue.id}}">
+                        <input class="ml-2 btn btn-primary btn-sm" type="submit" value="Add Deadline">
+                    </form>
+                </div>
+            {% endif %}
+        {% endif %}
     </div>
     {% include 'reporter/modal_.html' with id=issue.id %}
     {% empty %}

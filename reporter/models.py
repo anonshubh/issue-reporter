@@ -15,6 +15,7 @@ class Report(models.Model):
     cr_line = models.CharField(max_length=256,null=True,blank=True)
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
+    deadline = models.DateTimeField(null=True)
 
     def __str__(self):
         return f'By {self.user.user.username} ({self.content[:50]})'

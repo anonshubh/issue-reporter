@@ -14,6 +14,8 @@ urlpatterns=[
     path('delete/<int:pk>/',views.delete_issue_view,name='delete'),
     path('edit/<int:pk>/',views.edit_issue_view,name='edit'),
     path('voted-list/',views.voted_list_view,name='voted-list'),
+    path('deadline-add/',views.deadline_add_view,name='add-deadline'),
+    path('deadline-remove/<int:pk>',views.deadline_remove_view,name='remove-deadline'),
     
     #Vote API EndPoints
     path('update-vote/',views.vote_update_view,name='vote-update'),
