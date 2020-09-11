@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseForbidden ,HttpResponseNotAllowed,JsonResponse,HttpResponseServerError
+from django.http import HttpResponseNotAllowed,JsonResponse,HttpResponseServerError
+from django.core.exceptions import PermissionDenied
 import json
 
 from .models import Report , Vote
@@ -28,7 +29,7 @@ def close_issue_view(request,pk):
             obj.active = True
         obj.save()
         return redirect('reporter:close-stage')
-    return HttpResponseForbidden
+    raise PermissionDenied
 
 
 @login_required
@@ -42,7 +43,7 @@ def close_view(request):
             obj.save()
         qs = Report.objects.filter(active=False,department=request.user.info.department,year=request.user.info.join_year,resolved=False)
         return render(request,'reporter/closed.html',{'issue_list':qs})
-    return HttpResponseForbidden
+    raise PermissionDenied
 
 
 @login_required
@@ -75,7 +76,7 @@ def resolve_issue_view(request,pk):
         obj.resolved = True
         obj.save()
         return redirect('reporter:resolved')
-    return HttpResponseForbidden
+    raise PermissionDenied
 
 @login_required
 def delete_issue_view(request,pk):
@@ -84,7 +85,7 @@ def delete_issue_view(request,pk):
         if((request.user.info.is_cr and request.user.info.department == obj.department and request.user.info.join_year == obj.year) or (request.user == obj.user.user)):
             obj.delete()
             return redirect('reporter:index')
-    return HttpResponseForbidden
+    raise PermissionDenied
 
 @login_required
 def edit_issue_view(request,pk):
@@ -98,7 +99,7 @@ def edit_issue_view(request,pk):
                     form.save()
                 return redirect('reporter:index')
             return render(request,'reporter/edit-issue.html',{'form':form,'issue':obj})
-    return HttpResponseForbidden
+    raise PermissionDenied
 
 @login_required
 def vote_update_view(request):
@@ -109,25 +110,31 @@ def vote_update_view(request):
         try:
             report_obj = Report.objects.get(id=id_)
             vote_obj,created = Vote.objects.get_or_create(user=request.user,issue=report_obj)
+            userinfo_obj = UserInfo.objects.get(user=request.user)
         except:
-            raise HttpResponseServerError
+            return HttpResponseServerError()
         if(report_obj.active == True and report_obj.resolved == False):
             if(type=='upvote'):
                 (report_obj.upvotes)+=1
+                (userinfo_obj.total_upvotes)+=1
                 vote_obj.type = 1
             elif(type=='downvote'):
                 (report_obj.downvotes)-=1
+                (userinfo_obj.total_downvotes)-=1
                 vote_obj.type = 0
             elif(type=='downvoted'):
                 (report_obj.downvotes)+=1
+                (userinfo_obj.total_downvotes)-=1
                 vote_obj.type = -1
             elif(type=='upvoted'):
                 (report_obj.upvotes)-=1
+                (userinfo_obj.total_upvotes)-=1
                 vote_obj.type = -1
             report_obj.save()
             vote_obj.save()
+            userinfo_obj.save()
             return JsonResponse({'Success':'Voted'})
-    return HttpResponseNotAllowed
+    return HttpResponseNotAllowed('POST')
 
 
 @login_required
@@ -146,4 +153,31 @@ def vote_get_view(request):
         elif(type_ == -1):
             data = {'type':'none'}
         return JsonResponse(data)
-    return HttpResponseNotAllowed
+    return HttpResponseNotAllowed('POST')
+
+
+@login_required
+def voted_list_view(request):
+    if(request.user.info.is_cr):
+        department = request.user.info.department
+        year = request.user.info.join_year
+        qs = UserInfo.objects.filter(department=department,join_year=year)
+        context = {}
+        upvote_percent = 0.0
+        downvote_percent = 0.0
+        novote_percent = 0.0
+        for i in qs:
+            try:
+                upvote_percent = ((i.total_upvotes)/(i.total_upvotes+abs(i.total_downvotes)+abs(i.total_novotes)))*100
+                downvote_percent = ((abs(i.total_downvotes))/(i.total_upvotes+abs(i.total_downvotes)+abs(i.total_novotes)))*100
+                novote_percent = ((abs(i.total_novotes))/(i.total_upvotes+abs(i.total_downvotes)+abs(i.total_novotes)))*100
+            except ZeroDivisionError:
+                pass
+            context[i.user.username] = (
+                {'upvote':upvote_percent,
+                'downvote':downvote_percent,
+                'novote':novote_percent
+                }
+            )
+        return render(request,'reporter/voted-list.html',{'object_list':context})
+    raise PermissionDenied

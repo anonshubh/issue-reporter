@@ -13,6 +13,7 @@ urlpatterns=[
     path('close/',views.close_view,name='close-stage'),
     path('delete/<int:pk>/',views.delete_issue_view,name='delete'),
     path('edit/<int:pk>/',views.edit_issue_view,name='edit'),
+    path('voted-list/',views.voted_list_view,name='voted-list'),
     
     #Vote API EndPoints
     path('update-vote/',views.vote_update_view,name='vote-update'),

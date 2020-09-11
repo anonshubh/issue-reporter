@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<h2>Voting Data</h2>
+<a href="{% url 'reporter:index' %}">Back to Home</a>
+<hr>
+<table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Roll Number %</th>
+        <th scope="col">Total Upvotes %</th>
+        <th scope="col">Total Downvotes %</th>
+        <th scope="col">Total None-votes %</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        {% for obj,val in object_list.items %}
+        <th scope="row">{{forloop.counter}}</th>
+        <td>{{obj}}</td>
+        <td>{{val.upvote}} %</td>
+        <td>{{val.downvote}} %</td>
+        <td>{{val.novote}} %</td>
+      </tr>
+      {% empty %}
+      <p class="lead">No student Records!</p>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}

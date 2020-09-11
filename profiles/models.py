@@ -24,9 +24,15 @@ class UserInfo(models.Model):
     join_year = models.CharField(max_length=4)
     institute = models.ForeignKey(Institute,on_delete=models.CASCADE,related_name='allusers')
     registered_on = models.DateTimeField(auto_now_add=True)
+    total_upvotes = models.IntegerField(default=0)
+    total_downvotes = models.IntegerField(default=0)
+    total_novotes = models.IntegerField(default=0)
 
     def __str__(self):
         return self.user.username
+    
+    class Meta:
+        ordering = ['-total_upvotes','-total_downvotes','-total_novotes']
 
 
 @receiver(email_confirmed)
