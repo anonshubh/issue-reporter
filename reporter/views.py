@@ -126,7 +126,7 @@ def vote_update_view(request):
                 vote_obj.type = 0
             elif(type=='downvoted'):
                 (report_obj.downvotes)+=1
-                (userinfo_obj.total_downvotes)-=1
+                (userinfo_obj.total_downvotes)+=1
                 vote_obj.type = -1
             elif(type=='upvoted'):
                 (report_obj.upvotes)-=1
@@ -170,15 +170,21 @@ def voted_list_view(request):
         novote_percent = 0.0
         for i in qs:
             try:
-                upvote_percent = ((i.total_upvotes)/(i.total_upvotes+abs(i.total_downvotes)+abs(i.total_novotes)))*100
-                downvote_percent = ((abs(i.total_downvotes))/(i.total_upvotes+abs(i.total_downvotes)+abs(i.total_novotes)))*100
-                novote_percent = ((abs(i.total_novotes))/(i.total_upvotes+abs(i.total_downvotes)+abs(i.total_novotes)))*100
+                upvote_percent = (abs(i.total_upvotes)/(abs(i.total_upvotes)+abs(i.total_downvotes)+abs(i.total_novotes)))*100
             except ZeroDivisionError:
-                pass
+                upvote_percent = 0.0
+            try:
+                downvote_percent = ((abs(i.total_downvotes))/(abs(i.total_upvotes)+abs(i.total_downvotes)+abs(i.total_novotes)))*100
+            except ZeroDivisionError:
+                downvote_percent = 0.0
+            try:
+                novote_percent = ((abs(i.total_novotes))/(abs(i.total_upvotes)+abs(i.total_downvotes)+abs(i.total_novotes)))*100
+            except ZeroDivisionError:
+                novote_percent = 0.0
             context[i.user.username] = (
-                {'upvote':upvote_percent,
-                'downvote':downvote_percent,
-                'novote':novote_percent
+                {'upvote':round(upvote_percent,2),
+                'downvote':round(downvote_percent,2),
+                'novote':round(novote_percent,2)
                 }
             )
         return render(request,'reporter/voted-list.html',{'object_list':context})
@@ -213,3 +219,10 @@ def deadline_remove_view(request,pk):
             report_obj.deadline = None
             report_obj.save()
     return redirect("reporter:index")
+
+
+
+# obj
+# total = UserInfo.objects.filter(department=obj.department,join_year=obj.year).count()
+# upvotes_count = obj.upvotes
+# downvotes_count = obj.downvotes
