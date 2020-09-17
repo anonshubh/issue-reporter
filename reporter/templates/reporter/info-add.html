@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Add New Info</h2>
+<hr>
+<div>
+    <form action="{% url 'reporter:info-add' %}" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input class="btn btn-primary" type="submit" value="Add">
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Information List</h2>
+<a href="{% url 'reporter:index' %}">Back to Active List</a>
+<a class="ml-4" href="{% url 'reporter:info-add' %}">Add +</a>
+<hr>
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name (course)</th>
+        <th scope="col">Information</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for object in object_list %}
+        <tr>
+          <th scope="row">{{forloop.counter}}</th>
+          <td>{{object.name}} ({{object.course}})</td>
+          <td>{% if object.email %}Email: {{object.email}}{% endif %}<br>{% if object.phone %}Phone: {{object.phone}}{% endif %}</td>
+          {% if request.user.info == object.user or request.user.info.is_cr %}
+          <td><a class="btn btn-danger" href="{% url 'reporter:info-delete' object.id %}">Delete</a></td>
+          {% endif %}
+        </tr>
+        {% empty %}
+        <p class="lead">No List Available!</p>
+        {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

@@ -1,14 +1,13 @@
 from django import forms
 
-from .models import Report
+from .models import Report , InformationList
 
 class ReportForm(forms.ModelForm):
     class Meta:
         model = Report
-        fields = ['content']
+        fields = ['title','content']
 
 class DeadlineForm(forms.ModelForm):
-
     class Meta:
         model = Report
         fields = ['deadline']
@@ -18,3 +17,9 @@ class DeadlineForm(forms.ModelForm):
         labels = {
             'deadline': ''
         }
+
+
+class InformationListForm(forms.ModelForm):
+    class Meta:
+        model = InformationList
+        fields=['name','course','email','phone']

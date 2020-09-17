@@ -5,8 +5,8 @@ from django.core.exceptions import PermissionDenied
 from django.contrib import messages
 import json, datetime, pytz
 
-from .models import Report , Vote
-from .forms import ReportForm , DeadlineForm
+from .models import Report , Vote, InformationList
+from .forms import ReportForm , DeadlineForm, InformationListForm
 from profiles.models import UserInfo
 
 def index_view(request):
@@ -18,7 +18,7 @@ def index_view(request):
 
 @login_required
 def resolved_view(request):
-    qs = Report.objects.filter(active=False,department=request.user.info.department,year=request.user.info.join_year,resolved=True)
+    qs = Report.objects.filter(active=False,department=request.user.info.department,year=request.user.info.join_year,resolved=True).order_by('-updated')
     return render(request,'reporter/resolved.html',{'issue_list':qs})
 
 @login_required
@@ -43,7 +43,7 @@ def close_view(request):
             obj = Report.objects.get(id=id_)
             obj.cr_line = resolve_message
             obj.save()
-        qs = Report.objects.filter(active=False,department=request.user.info.department,year=request.user.info.join_year,resolved=False)
+        qs = Report.objects.filter(active=False,department=request.user.info.department,year=request.user.info.join_year,resolved=False).order_by('-updated')
         return render(request,'reporter/closed.html',{'issue_list':qs})
     raise PermissionDenied
 
@@ -221,8 +221,55 @@ def deadline_remove_view(request,pk):
     return redirect("reporter:index")
 
 
+@login_required
+def infolist_list_view(request):
+    user = request.user.info
+    qs = InformationList.objects.filter(department=user.department,year=user.join_year,approved=True)
+    return render(request,'reporter/info-list.html',{'object_list':qs})
 
-# obj
-# total = UserInfo.objects.filter(department=obj.department,join_year=obj.year).count()
-# upvotes_count = obj.upvotes
-# downvotes_count = obj.downvotes
+
+@login_required
+def infolist_add_view(request):
+    form = InformationListForm()
+    if(request.method=='POST'):
+        form = InformationListForm(request.POST)
+        if(form.is_valid()):
+            user_obj = request.user.info
+            instance = form.save(commit=False)
+            instance.user = user_obj
+            instance.department = user_obj.department
+            instance.year = user_obj.join_year
+            if(user_obj.is_cr):
+                instance.approved = True
+            instance.save()
+            if(not user_obj.is_cr):
+                messages.info(request,"Information will be Added, Once approved by CR!")
+            else:
+                messages.info(request,"Information Added!")
+            return redirect('reporter:info-list')
+    return render(request,'reporter/info-add.html',{'form':form})
+
+
+@login_required
+def infolist_approve_view(request,pk):
+    obj = get_object_or_404(InformationList,id=pk)
+    if(request.user.info.is_cr):
+        obj.approved = True
+        obj.save()
+        return redirect("reporter:info-pending")
+    raise PermissionDenied
+
+@login_required
+def infolist_delete_view(request,pk):
+    obj = get_object_or_404(InformationList,id=pk)
+    if(request.user.info==obj.user or request.user.info.is_cr):
+        obj.delete()
+        return redirect("reporter:info-list")
+    raise PermissionDenied
+
+
+@login_required
+def infolist_cr_pending_list(request):
+    user = request.user.info
+    qs = InformationList.objects.filter(department=user.department,year=user.join_year,approved=False)
+    return render(request,'reporter/info-pending.html',{'object_list':qs})

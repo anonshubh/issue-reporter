@@ -13,7 +13,9 @@
         {% if request.user.info.is_cr %}
         <a href="{% url 'reporter:close-stage' %}">Closed</a>
         <a class="ml-2 btn btn-secondary btn-sm" href="{% url 'reporter:voted-list' %}">Voting Data</a>
+        <a class="ml-5 btn btn-primary btn-sm" href="{% url 'reporter:info-pending' %}">Pending List</a>
         {% endif %}
+        <a class="ml-2 btn btn-primary btn-sm" href="{% url 'reporter:info-list' %}">Information List</a>
     </div>
     <hr>
 
