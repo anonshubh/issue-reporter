@@ -5,7 +5,7 @@ from profiles.models import UserInfo
 
 class Report(models.Model):
     user = models.ForeignKey(UserInfo,on_delete=models.CASCADE,blank=True)
-    title = models.CharField(max_length=56)
+    title = models.CharField('Subject',max_length=56)
     content = models.TextField('Issue')
     department = models.CharField(max_length=3,blank=True)
     year = models.CharField(max_length=4,blank=True)

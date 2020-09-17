@@ -7,9 +7,6 @@
 <table class="table table-hover">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">Name (course)</th>
-        <th scope="col">Information</th>
       </tr>
     </thead>
     <tbody>
@@ -19,6 +16,7 @@
         <td>{{object.name}} ({{object.course}})</td>
         <td>{% if object.email %}Email: {{object.email}}{% endif %}<br>{% if object.phone %}Phone: {{object.phone}}{% endif %}</td>
         <td><a class="btn btn-success" href="{% url 'reporter:info-approve' object.id %}">Approve It</a></td>
+        <td><a class="btn btn-danger" href="{% url 'reporter:info-delete' object.id %}">Remove</a></td>
       </tr>
       {% empty %}
       <p class="lead">No List Available!</p>
