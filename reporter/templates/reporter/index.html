@@ -1,21 +1,39 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block content %}
 
 <div>
-    <h2>A Boon For Cr's, (seriously, it's just a Reddit-Clone)</h2>
+    <h2 class="mt-3">A Boon For Cr's, (seriously, it's just a Reddit-Clone)</h2>
+
     {% if request.user.is_authenticated %}
     <h4>Department: {{request.user.info.department|upper}} {{request.user.info.join_year}}</h4>
     <h3>Welcome, {{request.user.first_name}} {{request.user.last_name}}</h3>
     <div class="container">
-        <a class="mr-3" href="{% url 'reporter:issue-form' %}">Add New Issue</a>
-        <a class="mx-2" href="{% url 'reporter:resolved' %}">Resolved</a>
-        {% if request.user.info.is_cr %}
-        <a href="{% url 'reporter:close-stage' %}">Closed</a>
-        <a class="ml-2 btn btn-secondary btn-sm" href="{% url 'reporter:voted-list' %}">Voting Data</a>
-        <a class="ml-5 btn btn-primary btn-sm" href="{% url 'reporter:info-pending' %}">Pending List</a>
-        {% endif %}
-        <a class="ml-2 btn btn-primary btn-sm" href="{% url 'reporter:info-list' %}">Information List</a>
+        <div class="row mb-3">
+            <div class="col-sm-6 col-lg-3 mt-1">
+                <a class="rcolor" href="{% url 'reporter:issue-form' %}">Add New Issue</a>
+            </div>
+            <div class="col-sm-6 col-lg-6 mt-1">
+                <a class="btn btn-primary btn-sm" href="{% url 'reporter:info-list' %}">Information List</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-lg-3 mt-2">
+                <a class="" href="{% url 'reporter:resolved' %}">Resolved</a>
+            </div>
+            {% if request.user.info.is_cr %}
+            <div class="col-sm-6 col-lg-3 mt-2"> 
+                <a href="{% url 'reporter:close-stage' %}">Closed</a>
+            </div>
+            <div class="col-sm-6 col-lg-3 mt-2">
+                <a class=" btn btn-primary btn-sm" href="{% url 'reporter:info-pending' %}">Pending List</a>
+            </div>
+            <div class="col-sm-6 col-lg-3 mt-2">
+                <a class="btn btn-secondary btn-sm" href="{% url 'reporter:voted-list' %}">Voting Data</a>
+            </div>
+            {% endif %}
+        </div>
     </div>
     <hr>
 
@@ -25,7 +43,7 @@
         <div class="card-body text-primary">
             <h5 class="card-title">{{issue.title}}</h5>
             <p class="card-text" >{{issue.content}}</p>
-          <p class="card-text">Posted on: {{issue.timestamp}}</p>
+          <p class="card-text">Posted on: {{issue.timestamp|date:'d-m-Y H:i'}}</p>
         </div>
         <div class="vote" data-id="{{issue.id}}">
             <button data-id="{{issue.id}}" class="upvote btn btn-link">Upvote</button>
@@ -44,13 +62,17 @@
             {% endif %}
         {% else %}
             {% if request.user.info.is_cr %}
-                <div class=" ml-2 mt-2 pb-3 deadline">
-                    <form action="{% url 'reporter:add-deadline' %}" method="post">
-                        {% csrf_token %}
-                        {{form}}
-                        <input type="hidden" name="id" value="{{issue.id}}">
-                        <input class="ml-2 btn btn-primary btn-sm" type="submit" value="Add Deadline">
-                    </form>
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-8  "> 
+                        <div class=" ml-2 mt-2 pb-3 deadline">
+                            <form action="{% url 'reporter:add-deadline' %}" method="post">
+                                {% csrf_token %}
+                                {{form|crispy}} 
+                                <input type="hidden" name="id" value="{{issue.id}}">
+                                <input class="ml-2 btn btn-primary btn-sm" type="submit" value="Add Deadline">
+                            </form>
+                        </div>
+                    </div>
                 </div>
             {% endif %}
         {% endif %}
@@ -60,7 +82,31 @@
     <p class="lead">Woohoo, No Active Issues!</p>
     {% endfor %}
     {% else %}
-    <p class="">Log In to Report Issues!</p>
+    <hr>
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12 mt-4">
+            <div class="card">
+                <div style="width: 18rem;" class="card-body">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente dicta illum, dignissimos architecto tempora commodi rem fuga mollitia cupiditate assumenda magnam, deleniti officiis, labore ea! Quia, unde! Esse, explicabo corrupti?
+                </div>
+              </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 mt-4">
+            <div class="card">
+                <div style="width: 18rem;" class="card-body">
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui maxime sit, fuga sint ducimus unde laboriosam laudantium perferendis praesentium eum consequatur. Rem sint velit vitae excepturi, minima recusandae repellendus! Et.
+                </div>
+              </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 mt-4">
+            <div class="card">
+                <div style="width: 18rem;" class="card-body">
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cupiditate, magni minima. Molestiae nobis laboriosam, quae aperiam quisquam nisi similique at amet perspiciatis, ipsam earum officiis laudantium ea, quam libero nihil.
+                </div>
+              </div>
+        </div>
+    </div>
+    <p class="mt-3">Log In to Report Issues!</p>
     {% endif %}
 </div>
 {% endblock %}

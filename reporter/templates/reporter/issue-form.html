@@ -1,13 +1,17 @@
 {% extends 'base.html' %}
-
+{% load crispy_forms_tags %}
 {% block content %}
-<h2>Add New Issue</h2>
+<h2 class="mt-2">Add New Issue</h2>
 <div>
-    <form action="{% url 'reporter:issue-form' %}" method="post">
-        {% csrf_token %}
-        {{form.as_p}}
-        <input class="btn btn-primary" type="submit" value="Save">
-    </form>
+    <div class="row">
+        <div class="col-lg-7 col-md-10 col-sm-12">
+            <form action="{% url 'reporter:issue-form' %}" method="post">
+                {% csrf_token %}
+                {{form|crispy}}
+                <input class="btn btn-primary mb-2" type="submit" value="Save">
+            </form>
+        </div>
+    </div>
 </div>
     
 {% endblock %}

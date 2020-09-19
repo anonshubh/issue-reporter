@@ -13,7 +13,7 @@
 {% csrf_token %}
 <fieldset class="blockLabels">
 
-  {% for emailaddress in user.emailaddress_set.all %}
+  {% for emailaddress ccounts/password/reset/done/in user.emailaddress_set.all %}
 <div class="ctrlHolder">
       <label for="email_radio_{{forloop.counter}}" class="{% if emailaddress.primary %}primary_email{%endif%}">
 

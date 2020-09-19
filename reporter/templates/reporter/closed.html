@@ -3,7 +3,7 @@
 {% block content %}
 
 {% if request.user.is_authenticated %}
-    <h4>Department: {{request.user.info.department|upper}} {{request.user.info.join_year}}</h4>
+    <h4 class=mt-2>Department: {{request.user.info.department|upper}} {{request.user.info.join_year}}</h4>
     <a href="{% url 'reporter:index' %}">Back to Active List</a>
     <hr>
     <p class="mt-2 lead text-center">Closed Issues</p>
@@ -20,9 +20,15 @@
           {% else %}
           <form action="{% url 'reporter:close-stage' %}" method="post">
             {% csrf_token %}
-            <input type="text" name="c-line">
+            <div class="row">
+              <div class="col-lg-5 col-md-7 col-sm-8">
+                <input class="form-control" type="text" name="c-line">
+              </div>
+              <div class="col-2">
+                  <input class="btn btn-primary btn-sm mt-1" type="submit" value="Add">
+              </div>
+            </div>
             <input type="hidden" name="id" value="{{issue.id}}">
-            <input type="submit" value="Add">
           </form>
           {% endif %}
         </div>

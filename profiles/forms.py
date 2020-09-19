@@ -1,9 +1,16 @@
-from allauth.account.forms import SignupForm
+from allauth.account.forms import SignupForm , LoginForm
 from django import forms
 from allauth.account.adapter import DefaultAccountAdapter 
 from django.forms import ValidationError
 
 from .models import Institute
+
+
+class CustomLoginForm(LoginForm):
+     def __init__(self, *args, **kwargs):
+        super(CustomLoginForm, self).__init__(*args, **kwargs)
+        self.fields['login'].widget.attrs = {'placeholder': 'Rollno or Institute Email', 'autofocus': 'autofocus'}
+
 
 class CustomSignupForm(SignupForm):
     first_name = forms.CharField(max_length=30, label='First Name') 

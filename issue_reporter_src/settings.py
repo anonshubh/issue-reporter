@@ -42,10 +42,14 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'crispy_forms',
     #local
     'profiles.apps.ProfilesConfig',
     'reporter.apps.ReporterConfig',
 ]
+
+#Crispy-Forms
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 #Django-allauth config
 SITE_ID = 1
@@ -58,7 +62,7 @@ ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_SESSION_REMEMBER = True
 
-ACCOUNT_FORMS = {'signup': 'profiles.forms.CustomSignupForm'}
+ACCOUNT_FORMS = {'signup': 'profiles.forms.CustomSignupForm','login': 'profiles.forms.CustomLoginForm'}
 
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
