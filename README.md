@@ -1,4 +1,4 @@
-## An Issue Reporting App which handles issues and resolves it conveniently.
+## An Issue Reporting App which handles issues and resolves it conveniently in Team.
 
 **Setup and Run Locally**
 ---
@@ -11,14 +11,20 @@
 4) `python manage.py runserver`
 
 **For Users**
-1) ...
-2) ...
+1) Test-user is Made in Production with username as testuser and password as demouser@123
+2) Test-user has all functionalities which are possessed by CRs/Team Leads
 
 **For Developers**
-1) ...
-2) ...
+(Built Using Django)
+1) Website consists of 2 django apps, profiles and reporter.
+2) User Authentication is implemented in profiles App.
+3) Issue Reporting is implemented in reporters App.
+4) All django templates are inheriting from ~/templates/base.html
+5) User Authentications templates are at Global Project Level.
+6) Issue Reporting templates are Local to reporter App.
+7) Upvotes and Downvotes are asynchronous implemented with VanillaJS only.
 
 **Technology Stack**
 ---
 Django 3.1.* <br>
-db: postgres
+db: postgres 12
