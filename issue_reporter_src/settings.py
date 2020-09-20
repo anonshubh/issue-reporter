@@ -52,7 +52,6 @@ INSTALLED_APPS = [
 
 
 #Smpt
-
 SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
 
 EMAIL_HOST = 'smtp.sendgrid.net'

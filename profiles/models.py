@@ -12,7 +12,7 @@ class User(AbstractUser):
 
 class Institute(models.Model):
     name = models.CharField(max_length =56)
-    domain = models.CharField(max_length=7)
+    domain = models.CharField(max_length=56)
 
     def __str__(self):
         return self.domain
