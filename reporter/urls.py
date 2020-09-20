@@ -5,6 +5,7 @@ app_name = 'reporter'
 
 urlpatterns=[
     path('',views.index_view,name='index'),
+    path('about-us/',views.about_view,name='about'),
     path('report/',views.issue_form_view,name='issue-form'),
     path('close-stage/<int:pk>/',views.close_issue_view,name='close-issue'),
     path('close-delete/<int:pk>/',views.delete_resolve_line_view,name='resolve-line-delete'),

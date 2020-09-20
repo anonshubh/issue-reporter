@@ -16,6 +16,9 @@ def index_view(request):
         qs = Report.objects.filter(active=True,department=request.user.info.department,year=request.user.info.join_year,resolved=False)
     return render(request,'reporter/index.html',{'issue_list':qs,'form':form})
 
+def about_view(request):
+    return render(request,'about.html')
+
 @login_required
 def resolved_view(request):
     qs = Report.objects.filter(active=False,department=request.user.info.department,year=request.user.info.join_year,resolved=True).order_by('-updated')
