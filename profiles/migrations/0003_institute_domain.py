@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='institute',
             name='domain',
-            field=models.CharField(default=django.utils.timezone.now, max_length=7),
+            field=models.CharField(null=True, max_length=7),
             preserve_default=False,
         ),
     ]
