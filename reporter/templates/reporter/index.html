@@ -4,7 +4,7 @@
 {% block content %}
 
 <div>
-    <h2 class="mt-3">A Boon For Cr's, (seriously, it's just a Reddit-Clone)</h2>
+    <h2 class="mt-3 text-center">TeamEzI Resolved</h2>
 
     {% if request.user.is_authenticated %}
     <h4>Department: {{request.user.info.department|upper}} {{request.user.info.join_year}}</h4>
@@ -85,28 +85,36 @@
     <hr>
     <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-12 mt-4">
-            <div class="card">
+            <a href="{% url 'account_signup' %}">
+            <div class="card card-color">
                 <div style="width: 18rem;" class="card-body">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente dicta illum, dignissimos architecto tempora commodi rem fuga mollitia cupiditate assumenda magnam, deleniti officiis, labore ea! Quia, unde! Esse, explicabo corrupti?
+                    New to the Site,<br> Register Now!
                 </div>
               </div>
+            </a>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12 mt-4">
-            <div class="card">
+            <a href="{% url 'account_login' %}">
+            <div class="card card-color">
                 <div style="width: 18rem;" class="card-body">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui maxime sit, fuga sint ducimus unde laboriosam laudantium perferendis praesentium eum consequatur. Rem sint velit vitae excepturi, minima recusandae repellendus! Et.
+                  Try Demo Login, <br>
+                  and Enjoy as Newbie!
                 </div>
               </div>
+            </a>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12 mt-4">
-            <div class="card">
+            <a href="">
+            <div class="card card-color">
                 <div style="width: 18rem;" class="card-body">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cupiditate, magni minima. Molestiae nobis laboriosam, quae aperiam quisquam nisi similique at amet perspiciatis, ipsam earum officiis laudantium ea, quam libero nihil.
+                  Rate us,
+                  and Give Suggestions!
                 </div>
               </div>
+            </a>
         </div>
     </div>
-    <p class="mt-3">Log In to Report Issues!</p>
+    <p class="mt-3"></p>
     {% endif %}
 </div>
 {% endblock %}

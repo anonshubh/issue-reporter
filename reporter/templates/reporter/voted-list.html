@@ -5,7 +5,8 @@
 <h2>Voting Data</h2>
 <a href="{% url 'reporter:index' %}">Back to Home</a>
 <hr>
-<table class="table">
+<div class="table-responsive">
+  <table class="table">
     <thead class="thead-light">
       <tr>
         <th scope="col">#</th>
@@ -29,5 +30,5 @@
       {% endfor %}
     </tbody>
   </table>
-
-{% endblock %}
+</div>
+  {% endblock %}

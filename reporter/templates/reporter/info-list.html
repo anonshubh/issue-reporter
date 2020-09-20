@@ -5,24 +5,26 @@
 <a href="{% url 'reporter:index' %}">Back to Active List</a>
 <a class="ml-4 rcolor" href="{% url 'reporter:info-add' %}">Add +</a>
 <hr>
-<table class="table table-hover">
+<div class="table-responsive">
+  <table class="table table-hover">
     <thead>
       <tr>
       </tr>
     </thead>
     <tbody>
-        {% for object in object_list %}
-        <tr>
-          <th scope="row">{{forloop.counter}}</th>
-          <td>{{object.name}} ({{object.course}})</td>
-          <td>{% if object.email %}Email: {{object.email}}{% endif %}<br>{% if object.phone %}Phone: {{object.phone}}{% endif %}</td>
-          {% if request.user.info == object.user or request.user.info.is_cr %}
-          <td><a class="btn btn-danger btn-sm" href="{% url 'reporter:info-delete' object.id %}">Delete</a></td>
-          {% endif %}
-        </tr>
-        {% empty %}
-        <p class="lead">No List Available!</p>
-        {% endfor %}
+      {% for object in object_list %}
+      <tr>
+        <th scope="row">{{forloop.counter}}</th>
+        <td>{{object.name}} ({{object.course}})</td>
+        <td>{% if object.email %}Email: {{object.email}}{% endif %}<br>{% if object.phone %}Phone: {{object.phone}}{% endif %}</td>
+        {% if request.user.info == object.user or request.user.info.is_cr %}
+        <td><a class="btn btn-danger btn-sm" href="{% url 'reporter:info-delete' object.id %}">Delete</a></td>
+        {% endif %}
+      </tr>
+      {% empty %}
+      <p class="lead">No List Available!</p>
+      {% endfor %}
     </tbody>
   </table>
+</div>
 {% endblock %}

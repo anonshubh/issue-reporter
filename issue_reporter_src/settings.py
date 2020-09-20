@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +21,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '$da#+7sp^da%cy22m8ghzh-qgb^h4(kef8a@i)xu5-kk)j2rb('
+
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '$da#+7sp^da%cy22m8ghzh-qgb^h4(kef8a@i)xu5-kk)j2rb(')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -48,6 +50,18 @@ INSTALLED_APPS = [
     'reporter.apps.ReporterConfig',
 ]
 
+
+#Smpt
+
+SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = SENDGRID_API_KEY
+EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+
 #Crispy-Forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -69,10 +83,12 @@ LOGOUT_REDIRECT_URL = "/"
 
 ACCOUNT_ADAPTER = 'profiles.forms.RestrictEmailAdapter'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -111,6 +127,11 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+import dj_database_url
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
+DATABASES['default']['CONN_MAX_AGE'] = 500
 
 
 # Password validation
@@ -162,6 +183,10 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 # Django Messages
 from django.contrib.messages import constants as messages
@@ -173,3 +198,18 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
+
+#SSL Settings
+if not DEBUG:
+    CORS_REPLACE_HTTPS_REFERER      = True
+    HOST_SCHEME                     = "https://"
+    SECURE_PROXY_SSL_HEADER         = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT             = True
+    SESSION_COOKIE_SECURE           = True
+    CSRF_COOKIE_SECURE              = True
+    SECURE_HSTS_INCLUDE_SUBDOMAINS  = True
+    SECURE_HSTS_SECONDS             = 1000000
+    SECURE_FRAME_DENY               = True
+    SECURE_CONTENT_TYPE_NOSNIFF     = True
+    SECURE_BROWSER_XSS_FILTER       = True
+    SECURE_HSTS_PRELOAD             = True

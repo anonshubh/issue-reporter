@@ -20,13 +20,27 @@
 }
 
 body{
-    background: #6190E8;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #A7BFE8, #6190E8);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #A7BFE8, #6190E8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    /* background: #6190E8;  
+    background: -webkit-linear-gradient(to right, #A7BFE8, #6190E8);  
+    background: linear-gradient(to right, #A7BFE8, #6190E8);  */
+
+    background: #085078;  
+    background: -webkit-linear-gradient(to right, #85D8CE, #085078); 
+    background: linear-gradient(to right, #85D8CE, #085078); 
+
+    /* background: #C33764;  
+    background: -webkit-linear-gradient(to right, #1D2671, #C33764);  
+    background: linear-gradient(to right, #1D2671, #C33764); */
+    
     
     font-family: 'Courier Prime', sans-serif;   
 }
 
 .rcolor{
     color: red;
+}
+
+
+.card-color{
+    background-color: rgb(245, 147, 147)
 }
