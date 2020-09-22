@@ -47,5 +47,12 @@ def user_info_creation(request,email_address,**kwargs):
         department = email[:3]
         year = email[3:5]
         year_ = "20"+year
+        if(year=="19"):
+            if(department=='mfd' or department=='mpd' or department=='mdm'):
+                department="mdm/mpd/mfd"
+            elif(department=='coe' or department=='ced'):
+                department="coe/ced"
+            elif(department=='edm' or department=='evd' or department=='esd'):
+                department="edm/evd/esd"
     #Addition or selection of another Institute will be in 'else' clause 
     user_obj = UserInfo.objects.create(user=user,institute=inst_obj,department=department,join_year=year_)
