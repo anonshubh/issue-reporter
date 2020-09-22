@@ -20,7 +20,7 @@ class Institute(models.Model):
 class UserInfo(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='info')
     is_cr = models.BooleanField(default=False)
-    department = models.CharField(max_length=3)
+    department = models.CharField(max_length=20)
     join_year = models.CharField(max_length=4)
     institute = models.ForeignKey(Institute,on_delete=models.CASCADE,related_name='allusers')
     registered_on = models.DateTimeField(auto_now_add=True)

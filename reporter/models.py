@@ -7,7 +7,7 @@ class Report(models.Model):
     user = models.ForeignKey(UserInfo,on_delete=models.CASCADE,blank=True)
     title = models.CharField('Subject',max_length=56)
     content = models.TextField('Issue')
-    department = models.CharField(max_length=3,blank=True)
+    department = models.CharField(max_length=20,blank=True)
     year = models.CharField(max_length=4,blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -42,7 +42,7 @@ class InformationList(models.Model):
     email = models.EmailField(null=True,blank=True)
     phone = models.PositiveIntegerField(null=True,blank=True)
     approved = models.BooleanField(default=False)
-    department = models.CharField(max_length=3,blank=True)
+    department = models.CharField(max_length=20,blank=True)
     year = models.CharField(max_length=4,blank=True)
 
     def __str__(self):
