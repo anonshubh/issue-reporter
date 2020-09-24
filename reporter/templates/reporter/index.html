@@ -4,8 +4,10 @@
 {% block content %}
 
 <div>
-    <h2 class="mt-3 text-center">TeamEzI Resolved</h2>
-
+    <!-- <h2 class="mt-3 text-center">TeamEzI Resolved</h2> -->
+    <div class="text-center">
+        <img src="{% static 'images/teamezi.jpg' %}" width="450" class="mt-2 img-fluid" alt="">
+    </div>
     {% if request.user.is_authenticated %}
     <h4>Department: {{request.user.info.department|upper}} {{request.user.info.join_year}}</h4>
     <h3>Welcome, {{request.user.first_name}} {{request.user.last_name}}</h3>
