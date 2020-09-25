@@ -6,6 +6,8 @@ app_name = 'reporter'
 urlpatterns=[
     path('',views.index_view,name='index'),
     path('about-us/',views.about_view,name='about'),
+    path('feed-back/',views.feedback_view,name='feed-back'),
+
     path('report/',views.issue_form_view,name='issue-form'),
     path('close-stage/<int:pk>/',views.close_issue_view,name='close-issue'),
     path('close-delete/<int:pk>/',views.delete_resolve_line_view,name='resolve-line-delete'),
@@ -23,6 +25,7 @@ urlpatterns=[
     path('info-add/',views.infolist_add_view,name='info-add'),
     path('info-approve/<int:pk>/',views.infolist_approve_view,name='info-approve'),
     path('info-delete/<int:pk>/',views.infolist_delete_view,name='info-delete'),
+
     #Vote API EndPoints
     path('update-vote/',views.vote_update_view,name='vote-update'),
     path('get-vote/',views.vote_get_view,name='vote-get'),

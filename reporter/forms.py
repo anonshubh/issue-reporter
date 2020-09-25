@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Report , InformationList
+from .models import Report , InformationList , FeedBack
 
 class ReportForm(forms.ModelForm):
     class Meta:
@@ -23,3 +23,9 @@ class InformationListForm(forms.ModelForm):
     class Meta:
         model = InformationList
         fields=['name','course','email','phone']
+
+
+class FeedBackForm(forms.ModelForm):
+    class Meta:
+        model = FeedBack
+        fields = '__all__'

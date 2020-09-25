@@ -47,3 +47,12 @@ class InformationList(models.Model):
 
     def __str__(self):
         return str(self.name)
+
+
+class FeedBack(models.Model):
+    name = models.CharField(max_length=56)
+    email = models.EmailField()
+    feedback = models.TextField()
+
+    def __str__(self):
+        return f"'{self.feedback[:10]}' By {self.name}"

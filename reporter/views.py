@@ -6,7 +6,7 @@ from django.contrib import messages
 import json, datetime, pytz
 
 from .models import Report , Vote, InformationList
-from .forms import ReportForm , DeadlineForm, InformationListForm
+from .forms import ReportForm , DeadlineForm, InformationListForm, FeedBackForm
 from profiles.models import UserInfo
 
 def index_view(request):
@@ -276,3 +276,17 @@ def infolist_cr_pending_list(request):
     user = request.user.info
     qs = InformationList.objects.filter(department=user.department,year=user.join_year,approved=False)
     return render(request,'reporter/info-pending.html',{'object_list':qs})
+
+
+def feedback_view(request):
+    form = FeedBackForm()
+    if(request.method=="POST"):
+        form = FeedBackForm(request.POST)
+        if(form.is_valid()):
+            form.save()
+            messages.info(request,"Thank You!, Your Message is Submitted to Site Administrator")
+            return redirect("reporter:index")
+        else:
+            messages.error(request,"Invalid Data!, Please Re-Fill the Form")
+            return redirect("reporter:feed-back")
+    return render(request,'reporter/feedback-form.html',{'form':form})
