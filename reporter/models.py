@@ -40,7 +40,7 @@ class InformationList(models.Model):
     name = models.CharField(max_length=56)
     course = models.CharField(max_length=56)
     email = models.EmailField(null=True,blank=True)
-    phone = models.PositiveIntegerField(null=True,blank=True)
+    phone = models.CharField(max_length=10,null=True,blank=True)
     approved = models.BooleanField(default=False)
     department = models.CharField(max_length=20,blank=True)
     year = models.CharField(max_length=4,blank=True)
