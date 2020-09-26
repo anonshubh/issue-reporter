@@ -42,5 +42,33 @@ body{
 
 
 .card-color{
-    background-color: rgb(245, 147, 147)
+    background-color: rgb(245, 147, 147);
+}
+
+
+.statement:hover{
+    text-decoration: none;
+}
+.statement-card{
+    background-color: rgb(225, 239, 251);
+}
+
+.statement-card:hover{
+    background-color: rgb(245, 147, 147);
+}
+
+.answer{
+    display: none;
+}
+
+.answer:hover{
+    text-decoration: none;
+}
+
+.answer-card{
+    background-color: rgb(245, 147, 147);
+}
+
+.answer-card:hover{
+    background-color: rgb(225, 239, 251);
 }

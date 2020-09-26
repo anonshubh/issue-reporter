@@ -107,3 +107,24 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+
+
+document.addEventListener("DOMContentLoaded",()=>{
+    document.querySelectorAll(".statement").forEach((button)=>{
+        button.onclick = () =>{
+            let statementId = button.id;
+            let answerId = `a${statementId.slice(1)}`;
+            document.querySelector(`#${statementId}`).style.display = 'none';
+            document.querySelector(`#${answerId}`).style.display = 'block';
+        }
+    })
+
+    document.querySelectorAll(".answer").forEach((button)=>{
+        button.onclick = () =>{
+            let answerId = button.id;
+            let statementId = `q${answerId.slice(1)}`;
+            document.querySelector(`#${answerId}`).style.display = 'none';
+            document.querySelector(`#${statementId}`).style.display = 'block';
+        }
+    })
+})

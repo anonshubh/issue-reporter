@@ -88,8 +88,7 @@
     <p class="lead">Woohoo, No Active Issues!</p>
     {% endfor %}
     {% else %}
-    <hr>
-    <div class="row">
+    <div class="row mt-2">
         <div class="col-lg-4 col-md-6 col-sm-12 mt-4">
             <a href="{% url 'account_signup' %}">
             <div class="card card-color">
@@ -120,7 +119,144 @@
             </a>
         </div>
     </div>
-    <p class="mt-3"></p>
+    <hr>
+    <p class="lead text-center">Problem Statements</p>
+    
+    <div class="row">
+        <div class="col-lg-3 col-md-8 col-sm-6 mx-4">
+            <button id="q1" class="btn btn-link statement">
+                <div class="card statement-card">
+                    <div style="width: 15rem; height: 15rem;" class="card-body">
+                        statement1<br>
+                        statement1<br>
+                        statement1<br>
+                        statement1<br>
+                    </div>
+                  </div>
+            </button>
+            <button id="a1" class="btn btn-link answer">
+                <div class="card answer-card">
+                    <div style="width: 15rem; height: 15rem;" class="card-body">
+                        Answer1<br>
+                        Answer1<br>
+                        Answer1<br>
+                        Answer1<br>
+                    </div>
+                  </div>
+            </button>
+        </div>
+        <div class="col-lg-3 col-md-8 col-sm-6 mx-4">
+            <button id="q2" class="btn btn-link statement">
+                <div class="card statement-card">
+                    <div style="width: 15rem; height: 15rem;" class="card-body">
+                      statement2<br>
+                      statement2<br>
+                      statement2<br>
+                      statement2<br>
+                    </div>
+                  </div>
+            </button>
+            <button id="a2" class="btn btn-link answer">
+                <div class="card answer-card">
+                    <div style="width: 15rem; height: 15rem;" class="card-body">
+                      Answer2<br>
+                      Answer2<br>
+                      Answer2<br>
+                      Answer2<br>
+                    </div>
+                  </div>
+            </button>
+        </div>
+        <div class="col-lg-3 col-md-8 col-sm-6 mx-4">
+            <button id="q3" class="btn btn-link statement">
+                <div class="card statement-card">
+                    <div style="width: 15rem; height: 15rem;" class="card-body">
+                      statement3<br>
+                      statement3<br>
+                      statement3<br>
+                      statement3<br>
+                    </div>
+                  </div>
+            </button>
+            <button id="a3" class="btn btn-link answer">
+                <div class="card answer-card">
+                    <div style="width: 15rem; height: 15rem;" class="card-body">
+                      Answer3<br>
+                      Answer3<br>
+                      Answer3<br>
+                      Answer3<br>
+                    </div>
+                  </div>
+            </button>
+        </div>
+    </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-8 col-sm-6 mx-4">
+                <button id="q4" class="btn btn-link statement">
+                    <div class="card statement-card">
+                        <div style="width: 15rem; height: 15rem;" class="card-body">
+                            statement4<br>
+                            statement4<br>
+                            statement4<br>
+                            statement4<br>
+                        </div>
+                      </div>
+                </button>
+                <button id="a4" class="btn btn-link answer">
+                    <div class="card answer-card">
+                        <div style="width: 15rem; height: 15rem;" class="card-body">
+                            Answer4<br>
+                            Answer4<br>
+                            Answer4<br>
+                            Answer4<br>
+                        </div>
+                      </div>
+                </button>
+            </div>
+            <div class="col-lg-3 col-md-8 col-sm-6 mx-4">
+                <button id="q5" class="btn btn-link statement">
+                    <div class="card statement-card">
+                        <div style="width: 15rem; height: 15rem;" class="card-body">
+                          statement5<br>
+                          statement5<br>
+                          statement5<br>
+                          statement5<br>
+                        </div>
+                      </div>
+                </button>
+                <button id="a5" class="btn btn-link answer">
+                    <div class="card answer-card">
+                        <div style="width: 15rem; height: 15rem;" class="card-body">
+                          Answer5<br>
+                          Answer5<br>
+                          Answer5<br>
+                          Answer5<br>
+                        </div>
+                      </div>
+                </button>
+            </div>
+            <div class="col-lg-3 col-md-8 col-sm-6 mx-4">
+                <button id="q6" class="btn btn-link statement">
+                    <div class="card statement-card">
+                        <div style="width: 15rem; height: 15rem;" class="card-body">
+                          statement6<br>
+                          statement6<br>
+                          statement6<br>
+                          statement6<br>
+                        </div>
+                      </div>
+                </button>
+                <button id="a6" class="btn btn-link answer">
+                    <div class="card answer-card">
+                        <div style="width: 15rem; height: 15rem;" class="card-body">
+                          Answer6<br>
+                          Answer6<br>
+                          Answer6<br>
+                          Answer6<br>
+                        </div>
+                      </div>
+                </button>
+            </div>
     {% endif %}
 </div>
 {% endblock %}
