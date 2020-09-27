@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     #local
     'profiles.apps.ProfilesConfig',
     'reporter.apps.ReporterConfig',
+    'polling.apps.PollingConfig',
 ]
 
 
