@@ -35,7 +35,7 @@ class Vote(models.Model):
 
 
 
-class InformationList(models.Model):
+class ContactList(models.Model):
     user = models.ForeignKey(UserInfo,on_delete=models.CASCADE,blank=True)
     name = models.CharField(max_length=56)
     course = models.CharField(max_length=56)

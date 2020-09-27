@@ -21,7 +21,7 @@
                 <a class="rcolor" href="{% url 'reporter:issue-form' %}">Add New Issue</a>
             </div>
             <div class="col-sm-6 col-lg-6 mt-1">
-                <a class="btn btn-primary btn-sm" href="{% url 'reporter:info-list' %}">Information List</a>
+                <a class="btn btn-primary btn-sm" href="{% url 'reporter:contact-list' %}">Contact List</a>
             </div>
         </div>
         <div class="row">
@@ -33,7 +33,7 @@
                 <a href="{% url 'reporter:close-stage' %}">Closed</a>
             </div>
             <div class="col-sm-6 col-lg-3 mt-2">
-                <a class=" btn btn-primary btn-sm" href="{% url 'reporter:info-pending' %}">Pending List</a>
+                <a class=" btn btn-primary btn-sm" href="{% url 'reporter:contact-pending' %}">Pending List</a>
             </div>
             <div class="col-sm-6 col-lg-3 mt-2">
                 <a class="btn btn-secondary btn-sm" href="{% url 'reporter:voted-list' %}">Voting Data</a>
@@ -120,27 +120,23 @@
         </div>
     </div>
     <hr>
-    <p class="lead text-center">Problem Statements</p>
+    <p class="lead text-center">Problem Statements!</p>
     
     <div class="row">
         <div class="col-lg-3 col-md-8 col-sm-6 mx-4">
             <button id="q1" class="btn btn-link statement">
                 <div class="card statement-card">
-                    <div style="width: 15rem; height: 15rem;" class="card-body">
-                        statement1<br>
-                        statement1<br>
-                        statement1<br>
-                        statement1<br>
+                    <div style="width: 15rem; height: 20rem;" class="card-body">
+                        <p class="lead"><em>Problem</em></p>
+                        <p>Solving any issue of a  class is a fragile situation,opinions can clash,Every single time creating surveys are bizarre responsibiltiy and a headache for Class rep(CR)/team leaer(TL).</p>
                     </div>
                   </div>
             </button>
             <button id="a1" class="btn btn-link answer">
                 <div class="card answer-card">
-                    <div style="width: 15rem; height: 15rem;" class="card-body">
-                        Answer1<br>
-                        Answer1<br>
-                        Answer1<br>
-                        Answer1<br>
+                    <div style="width: 15rem;" class="card-body">
+                        <p class="lead"><em>Solution</em></p>
+                        <p>This portal is built mainly to solve any issues of a class or a team unbiasedly and clarity,simply anyone can park their issues and get it resolved with other members responses on it,thus reducing the headache of a CR/TL to create surveys and broadcast it to everyone.</p>
                     </div>
                   </div>
             </button>
@@ -148,21 +144,17 @@
         <div class="col-lg-3 col-md-8 col-sm-6 mx-4">
             <button id="q2" class="btn btn-link statement">
                 <div class="card statement-card">
-                    <div style="width: 15rem; height: 15rem;" class="card-body">
-                      statement2<br>
-                      statement2<br>
-                      statement2<br>
-                      statement2<br>
+                    <div style="width: 15rem; height: 20rem;" class="card-body">
+                        <p class="lead"><em>Problem</em></p>
+                     <p>New to a portal can also turn our face wry ,as exploring and figuring functioning of a website is time consuming.</p>
                     </div>
                   </div>
             </button>
             <button id="a2" class="btn btn-link answer">
                 <div class="card answer-card">
-                    <div style="width: 15rem; height: 15rem;" class="card-body">
-                      Answer2<br>
-                      Answer2<br>
-                      Answer2<br>
-                      Answer2<br>
+                    <div style="width: 15rem; " class="card-body">
+                        <p class="lead"><em>Solution</em></p>
+                      <p>We tried to keep the portal as simplistic as possible and to make it easy ,we are providing fake login ,click it to explore website completely.</p>
                     </div>
                   </div>
             </button>
@@ -170,21 +162,17 @@
         <div class="col-lg-3 col-md-8 col-sm-6 mx-4">
             <button id="q3" class="btn btn-link statement">
                 <div class="card statement-card">
-                    <div style="width: 15rem; height: 15rem;" class="card-body">
-                      statement3<br>
-                      statement3<br>
-                      statement3<br>
-                      statement3<br>
+                    <div style="width: 15rem; height: 20rem;" class="card-body">
+                        <p class="lead"><em>Problem</em></p>
+                    <p>To make immediate decisions for a class is risky and unfair,how to overcome that</p>
                     </div>
                   </div>
             </button>
             <button id="a3" class="btn btn-link answer">
                 <div class="card answer-card">
-                    <div style="width: 15rem; height: 15rem;" class="card-body">
-                      Answer3<br>
-                      Answer3<br>
-                      Answer3<br>
-                      Answer3<br>
+                    <div style="width: 15rem;" class="card-body">
+                        <p class="lead"><em>Solution</em></p>
+                     <p>Since the functioning of solving an issue in the portal is sufficiently automated,the frequency of solving them will drastically rise,and therfore more decisions can be made beforehand even if it was never an issue and was only predicted in future.all it needs just a one person to raise any issue among whole class and thus reducing chances for CR to make immediate decisions</p>
                     </div>
                   </div>
             </button>
@@ -194,21 +182,17 @@
             <div class="col-lg-3 col-md-8 col-sm-6 mx-4">
                 <button id="q4" class="btn btn-link statement">
                     <div class="card statement-card">
-                        <div style="width: 15rem; height: 15rem;" class="card-body">
-                            statement4<br>
-                            statement4<br>
-                            statement4<br>
-                            statement4<br>
+                        <div style="width: 15rem; height: 20rem;" class="card-body">
+                        <p class="lead"><em>Problem</em></p>
+                            <p>"There's no rose without thorn",there are some people who are reluctant not to cooperate and participate in surveys.</p>
                         </div>
                       </div>
                 </button>
                 <button id="a4" class="btn btn-link answer">
                     <div class="card answer-card">
-                        <div style="width: 15rem; height: 15rem;" class="card-body">
-                            Answer4<br>
-                            Answer4<br>
-                            Answer4<br>
-                            Answer4<br>
+                        <div style="width: 15rem;" class="card-body">
+                            <p class="lead"><em>Solution</em></p>
+                           <p>This portal automatically generates data about people paticipations,CR can access it and make use of it and these people can be notified easily.</p>
                         </div>
                       </div>
                 </button>
@@ -216,21 +200,17 @@
             <div class="col-lg-3 col-md-8 col-sm-6 mx-4">
                 <button id="q5" class="btn btn-link statement">
                     <div class="card statement-card">
-                        <div style="width: 15rem; height: 15rem;" class="card-body">
-                          statement5<br>
-                          statement5<br>
-                          statement5<br>
-                          statement5<br>
+                        <div style="width: 15rem; height: 20rem;" class="card-body">
+                        <p class="lead"><em>Problem</em></p>
+                         <p>Power of a CR is uncertain.A CR can promote impartiality.</p>
                         </div>
                       </div>
                 </button>
                 <button id="a5" class="btn btn-link answer">
                     <div class="card answer-card">
-                        <div style="width: 15rem; height: 15rem;" class="card-body">
-                          Answer5<br>
-                          Answer5<br>
-                          Answer5<br>
-                          Answer5<br>
+                        <div style="width: 15rem;" class="card-body">
+                        <p class="lead"><em>Solution</em></p>
+                         <p>This portal ensures fair game play,Powers of a CR are neither less nor more and limited.</p>
                         </div>
                       </div>
                 </button>
@@ -238,21 +218,17 @@
             <div class="col-lg-3 col-md-8 col-sm-6 mx-4">
                 <button id="q6" class="btn btn-link statement">
                     <div class="card statement-card">
-                        <div style="width: 15rem; height: 15rem;" class="card-body">
-                          statement6<br>
-                          statement6<br>
-                          statement6<br>
-                          statement6<br>
+                        <div style="width: 15rem; height: 20rem;" class="card-body">
+                        <p class="lead"><em>Problem</em></p>
+                          <p>People frequently ask help to CR for the things which were already told before or been discussed before.</p>
                         </div>
                       </div>
                 </button>
                 <button id="a6" class="btn btn-link answer">
                     <div class="card answer-card">
-                        <div style="width: 15rem; height: 15rem;" class="card-body">
-                          Answer6<br>
-                          Answer6<br>
-                          Answer6<br>
-                          Answer6<br>
+                        <div style="width: 15rem;" class="card-body">
+                        <p class="lead"><em>Solution</em></p>
+                         <p>Portal has a permanent stockplace for important information(for example-contact info,academic info)+ a stockplace for temporary information like deadlines.</p>
                         </div>
                       </div>
                 </button>

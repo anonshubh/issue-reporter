@@ -5,8 +5,8 @@ from django.core.exceptions import PermissionDenied
 from django.contrib import messages
 import json, datetime, pytz
 
-from .models import Report , Vote, InformationList
-from .forms import ReportForm , DeadlineForm, InformationListForm, FeedBackForm
+from .models import Report , Vote, ContactList
+from .forms import ReportForm , DeadlineForm, ContactListForm, FeedBackForm
 from profiles.models import UserInfo
 
 def index_view(request):
@@ -225,17 +225,17 @@ def deadline_remove_view(request,pk):
 
 
 @login_required
-def infolist_list_view(request):
+def contactlist_list_view(request):
     user = request.user.info
-    qs = InformationList.objects.filter(department=user.department,year=user.join_year,approved=True)
-    return render(request,'reporter/info-list.html',{'object_list':qs})
+    qs = ContactList.objects.filter(department=user.department,year=user.join_year,approved=True)
+    return render(request,'reporter/contact-list.html',{'object_list':qs})
 
 
 @login_required
-def infolist_add_view(request):
-    form = InformationListForm()
+def contactlist_add_view(request):
+    form = ContactListForm()
     if(request.method=='POST'):
-        form = InformationListForm(request.POST)
+        form = ContactListForm(request.POST)
         if(form.is_valid()):
             user_obj = request.user.info
             instance = form.save(commit=False)
@@ -249,33 +249,33 @@ def infolist_add_view(request):
                 messages.info(request,"Information will be Added, Once approved by CR!")
             else:
                 messages.info(request,"Information Added!")
-            return redirect('reporter:info-list')
-    return render(request,'reporter/info-add.html',{'form':form})
+            return redirect('reporter:contact-list')
+    return render(request,'reporter/contact-add.html',{'form':form})
 
 
 @login_required
-def infolist_approve_view(request,pk):
-    obj = get_object_or_404(InformationList,id=pk)
+def contactlist_approve_view(request,pk):
+    obj = get_object_or_404(ContactList,id=pk)
     if(request.user.info.is_cr):
         obj.approved = True
         obj.save()
-        return redirect("reporter:info-pending")
+        return redirect("reporter:contact-pending")
     raise PermissionDenied
 
 @login_required
-def infolist_delete_view(request,pk):
-    obj = get_object_or_404(InformationList,id=pk)
+def contactlist_delete_view(request,pk):
+    obj = get_object_or_404(ContactList,id=pk)
     if(request.user.info==obj.user or request.user.info.is_cr):
         obj.delete()
-        return redirect("reporter:info-list")
+        return redirect("reporter:contact-list")
     raise PermissionDenied
 
 
 @login_required
-def infolist_cr_pending_list(request):
+def contactlist_cr_pending_list(request):
     user = request.user.info
-    qs = InformationList.objects.filter(department=user.department,year=user.join_year,approved=False)
-    return render(request,'reporter/info-pending.html',{'object_list':qs})
+    qs = ContactList.objects.filter(department=user.department,year=user.join_year,approved=False)
+    return render(request,'reporter/contact-pending.html',{'object_list':qs})
 
 
 def feedback_view(request):

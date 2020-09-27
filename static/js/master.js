@@ -1,3 +1,4 @@
+//Toggle of Upvote and Downvote
 document.addEventListener("DOMContentLoaded",()=>{
     document.querySelectorAll('.vote').forEach((div)=>{
         let id_ = div.dataset.id;
@@ -108,7 +109,7 @@ function getCookie(name) {
     return cookieValue;
 }
 
-
+//Display of Problem-Statements 
 document.addEventListener("DOMContentLoaded",()=>{
     document.querySelectorAll(".statement").forEach((button)=>{
         button.onclick = () =>{

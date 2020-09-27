@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Information List</h2>
+<h2>Contact List</h2>
 <a href="{% url 'reporter:index' %}">Back to Active List</a>
-<a class="ml-4 rcolor" href="{% url 'reporter:info-add' %}">Add +</a>
+<a class="ml-4 rcolor" href="{% url 'reporter:contact-add' %}">Add +</a>
 <hr>
 <div class="table-responsive">
   <table class="table table-hover">
@@ -18,7 +18,7 @@
         <td>{{object.name}} ({{object.course}})</td>
         <td>{% if object.email %}Email: {{object.email}}{% endif %}<br>{% if object.phone %}Phone: {{object.phone}}{% endif %}</td>
         {% if request.user.info == object.user or request.user.info.is_cr %}
-        <td><a class="btn btn-danger btn-sm" href="{% url 'reporter:info-delete' object.id %}">Delete</a></td>
+        <td><a class="btn btn-danger btn-sm" href="{% url 'reporter:contact-delete' object.id %}">Delete</a></td>
         {% endif %}
       </tr>
       {% empty %}

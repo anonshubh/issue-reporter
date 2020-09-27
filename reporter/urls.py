@@ -20,11 +20,11 @@ urlpatterns=[
     path('deadline-add/',views.deadline_add_view,name='add-deadline'),
     path('deadline-remove/<int:pk>',views.deadline_remove_view,name='remove-deadline'),
     
-    path('info-list/',views.infolist_list_view,name='info-list'),
-    path('info-pending/',views.infolist_cr_pending_list,name='info-pending'),
-    path('info-add/',views.infolist_add_view,name='info-add'),
-    path('info-approve/<int:pk>/',views.infolist_approve_view,name='info-approve'),
-    path('info-delete/<int:pk>/',views.infolist_delete_view,name='info-delete'),
+    path('contact-list/',views.contactlist_list_view,name='contact-list'),
+    path('contact-pending/',views.contactlist_cr_pending_list,name='contact-pending'),
+    path('contact-add/',views.contactlist_add_view,name='contact-add'),
+    path('contact-approve/<int:pk>/',views.contactlist_approve_view,name='contact-approve'),
+    path('contact-delete/<int:pk>/',views.contactlist_delete_view,name='contact-delete'),
 
     #Vote API EndPoints
     path('update-vote/',views.vote_update_view,name='vote-update'),

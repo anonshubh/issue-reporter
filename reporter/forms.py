@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Report , InformationList , FeedBack
+from .models import Report , ContactList , FeedBack
 
 class ReportForm(forms.ModelForm):
     class Meta:
@@ -19,9 +19,9 @@ class DeadlineForm(forms.ModelForm):
         }
 
 
-class InformationListForm(forms.ModelForm):
+class ContactListForm(forms.ModelForm):
     class Meta:
-        model = InformationList
+        model = ContactList
         fields=['name','course','email','phone']
 
 

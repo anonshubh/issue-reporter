@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-<h2 class="mt-2">Add New Info</h2>
+<h2 class="mt-2">Add New Contact</h2>
 <hr>
 <div class="row">
     <div class="col-lg-7 col-md-10 col-sm-12">
-        <form action="{% url 'reporter:info-add' %}" method="post">
+        <form action="{% url 'reporter:contact-add' %}" method="post">
             {% csrf_token %}
             {{form|crispy}}
             <input class="btn btn-primary mb-2" type="submit" value="Add">
