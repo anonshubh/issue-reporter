@@ -10,7 +10,7 @@
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
      
     <!-- FAVICON -->
-    <link rel ="apple-touch-icon" sizes ="180x180" href ="{% static 'images/fav/apple-touch-icon.png' %}">
+    <link rel ="apple-touch-icon" sizes ="240x240" href ="{% static 'images/fav/apple-touch-icon.png' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/fav/favicon-32x32.png' %}">
     <link rel="icon" type="image/png" sizes ="16x16" href ="{% static 'images/fav/favicon-16x16.png' %}">
     <link rel="manifest" href ="{% static 'images/fav/site.webmanifest' %}">
@@ -22,11 +22,11 @@
      <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
      
    
-    <title>{% block title %}Let's Resolve{% endblock %}</title>
+    <title>{% block title %}Resolving made Easy,with TeamEzi!{% endblock %}</title>
   </head>
   <body>
     <section>
-      <nav style="background-color:rgba(63, 61, 61, 0.89) ;" class="navbar navbar-expand-lg navbar-dark">
+      <nav style="background-color:rgba(83, 71, 41, 0.66) ;" class="navbar navbar-expand-lg navbar-dark">
         <a class="navbar-brand" href="{% url 'reporter:index' %}">Resolver</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -35,7 +35,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link my-1 mr-2 text-center" href="{% url 'reporter:about' %}">About<span class="sr-only">(current)</span></a>
+              <a class="nav-link my-1 mr-2 text-center" href="{% url 'reporter:about' %}">About Us<span class="sr-only">(current)</span></a>
             </li>
             {% if request.user.is_authenticated %}
             <li class="nav-item">
