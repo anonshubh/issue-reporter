@@ -51,10 +51,13 @@ body{
 }
 .statement-card{
     background-color: rgb(225, 239, 251);
+    border-left: 6px solid red;
+    border-radius: 5px;
 }
 
 .statement-card:hover{
     background-color: rgb(245, 147, 147);
+    
 }
 
 .answer{
@@ -67,8 +70,16 @@ body{
 
 .answer-card{
     background-color: rgb(245, 147, 147);
+    border-left: 6px solid blue;
+    border-radius: 5px;
 }
 
 .answer-card:hover{
     background-color: rgb(225, 239, 251);
+}
+@media only screen and (max-width: 480px) {
+    body{
+        background-image: linear-gradient(to bottom right, lightblue, green);
+        background-color: lightsteelblue; /* For browsers that do not support gradients */
+    }
 }
