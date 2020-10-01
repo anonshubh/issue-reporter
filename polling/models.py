@@ -1,3 +1,7 @@
 from django.db import models
 
-# Create your models here.
+from profiles.models import UserInfo
+
+# class Poll(models.Model):
+#     user = models.ForeignKey(UserInfo,on_delete=models.CASCADE,related_name='poll')
+    
