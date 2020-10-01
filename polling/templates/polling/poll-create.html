@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h2 class="mt-2">Create New Poll</h2>
+<a href="{% url 'polling:list' %}">Back to Live Polls</a>
+<hr>
+<div>
+    <div class="row">
+        <div class="col-lg-7 col-md-10 col-sm-12">
+            <form id="poll-form" action="{% url 'polling:create' %}" method="post">
+                {% csrf_token %}
+                {{form|crispy}}
+                <br>
+                <input class="btn btn-primary mb-2 mt-2" type="submit" value="Create">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %} <script src="{% static 'js/polling.js' %}"></script> {% endblock %}
