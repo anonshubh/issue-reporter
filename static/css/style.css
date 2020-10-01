@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
 .upvote{
     display: none;
     color: green;
@@ -30,10 +32,11 @@ body{
 
     /* background: #C33764;  
     background: -webkit-linear-gradient(to right, #1D2671, #C33764);  
-    background: linear-gradient(to right, #1D2671, #C33764); */
+    background: linear-gradient(to right, #1D2671, #C33764); 
     
     
-    font-family: 'Courier Prime', sans-serif;   
+    font-family: 'Courier Prime', sans-serif;   */
+    font-family: 'Poppins', sans-serif;
 }
 
 .rcolor{
