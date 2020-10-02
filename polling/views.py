@@ -16,4 +16,6 @@ def poll_create_view(request):
     if(not request.user.info.is_cr):
         raise PermissionDenied
     form = PollForm()
+    if(request.method=='POST'):
+        print(request.body)
     return render(request,'polling/poll-create.html',{"form":form})
