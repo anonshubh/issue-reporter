@@ -65,6 +65,7 @@ document.addEventListener("DOMContentLoaded",()=>{
         .then(response => response.json())
         .then(data=>{
             console.log(data);
+            window.location.replace("/polling/");
         })
         return false;
     }

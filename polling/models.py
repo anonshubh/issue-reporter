@@ -3,7 +3,10 @@ from django.db import models
 from profiles.models import UserInfo
 
 class Option(models.Model):
-    text = models.CharField(max_length=56)
+    text = models.CharField(max_length=128)
+
+    def __str__(self):
+        return str(self.text[:20])
 
 class Poll(models.Model):
     user = models.ForeignKey(UserInfo,on_delete=models.CASCADE,related_name='poll',blank=True)
@@ -14,5 +17,5 @@ class Poll(models.Model):
     active = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"{self.content[:20]} by {self.user}"
+        return f"{self.statement[:20]} by {self.user}"
     

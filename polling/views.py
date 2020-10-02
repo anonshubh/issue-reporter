@@ -1,8 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.http import JsonResponse
+import json
 
-from .models import Poll
+from .models import Poll,Option
 from .forms import PollForm
 
 @login_required
@@ -17,5 +20,18 @@ def poll_create_view(request):
         raise PermissionDenied
     form = PollForm()
     if(request.method=='POST'):
-        print(request.body)
+        data = json.loads(request.body)
+        obj = Poll.objects.create(
+            user = request.user.info,
+            statement = data['statement'],
+            department= request.user.info.department,
+            join = request.user.info.join_year
+        )
+        options = data['option']
+        for i in options:
+            new_option = Option.objects.create(text=i)
+            obj.options.add(new_option)
+        obj.save()
+        messages.success(request, 'Poll is Created')
+        return JsonResponse({"Success":"Created"},status=200)
     return render(request,'polling/poll-create.html',{"form":form})
