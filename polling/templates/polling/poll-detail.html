@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="mt-2 text-center">Poll</h2>
+<div class="row">
+    <div class="col-12">
+        <h3 class="lead">Statement: {{object.statement}}</h3>
+    </div>
+    <form action="{% url 'polling:submit' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="poll" value="{{object.id}}">
+        {% for option in options %}
+        <div class="col-12">
+            <input type="radio" id="{{option.id}}" name="option" value="{{option.id}}">
+            <label for="{{option.id}}">{{option.text}}</label><br>
+        </div>
+        {% empty %}
+        <p class="lead">No Option Available!</p>
+        {% endfor %}
+        <input class="btn btn-primary" type="submit" value="Submit">
+    </form>
+</div>
+
+{% endblock %}

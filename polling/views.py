@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect ,get_object_or_404
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -12,6 +12,13 @@ from .forms import PollForm
 def polling_list_view(request):
     qs = Poll.objects.filter(active=True,department=request.user.info.department,join=request.user.info.join_year)
     return render(request,'polling/poll-list.html',{'object_list':qs})
+
+
+@login_required
+def polling_detail_view(request,id):
+    object = get_object_or_404(Poll,pk=id)
+    options = object.options.all()
+    return render(request,'polling/poll-detail.html',{"object":object,'options':options})
 
 
 @login_required
@@ -35,3 +42,10 @@ def poll_create_view(request):
         messages.success(request, 'Poll is Created')
         return JsonResponse({"Success":"Created"},status=200)
     return render(request,'polling/poll-create.html',{"form":form})
+
+
+@login_required
+def poll_submit_view(request):
+    if(request.method=='POST'):
+        print(request.POST)
+    return None

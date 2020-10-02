@@ -13,8 +13,20 @@
 {% endif %}
 <hr>
 <h2 class="mt-2 text-center">Live Polls</h2>
-<div>
-   
+<div class="row">
+    {% for object in object_list %}
+    <div class="col-lg-7 col-md-10 col-sm-12 mb-3">
+        <div class="card">
+            <div class="card-body">
+                {{object.statement}}
+            </div>
+            <h6 class="card-subtitle mb-2 text-muted">{{object.timestamp|date:'d-m-Y H:i'}}</h6>
+            <a class="btn btn-primary" href="{% url 'polling:detail' object.id %}">View</a>
+        </div>
+    </div>
+    {% empty %}
+    <p class="lead my-2">No Live Polls!</p>
+    {% endfor %}
 </div>
 
 {% endblock %}
