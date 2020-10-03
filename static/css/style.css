@@ -35,6 +35,8 @@ body{
     
     font-family: 'Courier Prime', sans-serif;   
 }
+nav{
+    position: fixed;
 
 .rcolor{
     color: red;
