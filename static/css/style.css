@@ -77,12 +77,13 @@ body{
 .answer-card:hover{
     background-color: rgb(225, 239, 251);
 }
-@media only screen and (max-width: 480px) {
+
+/* @media only screen and (max-width: 480px) {
     body{
         background-image: linear-gradient(to bottom right, lightblue, green);
-        background-color: lightsteelblue; /* For browsers that do not support gradients */
+        background-color: lightsteelblue;
     }
-}
+} */
 
 
 .inline-block{
