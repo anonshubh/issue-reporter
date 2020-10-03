@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
 <h2 class="mt-2 text-center">Poll</h2>
+<a class="mt-2 inline-block" href="{% url 'polling:list' %}">Back to Live Polls</a>
+<p>Your Vote is Anonymized!</p>
+<hr>
 <div class="row">
     <div class="col-12">
         <h3 class="lead">Statement: {{object.statement}}</h3>

@@ -10,7 +10,7 @@ from .forms import PollForm
 
 @login_required
 def polling_list_view(request):
-    qs = Poll.objects.filter(active=True,department=request.user.info.department,join=request.user.info.join_year)
+    qs = Poll.objects.filter(active=True,department=request.user.info.department,join=request.user.info.join_year).order_by('-timestamp')
     return render(request,'polling/poll-list.html',{'object_list':qs})
 
 
@@ -30,7 +30,7 @@ def poll_create_view(request):
     form = PollForm()
     if(request.method=='POST'):
         data = json.loads(request.body)
-        obj = Poll.objects.create(
+        obj = Poll.objects.create(  
             user = request.user.info,
             statement = data['statement'],
             department= request.user.info.department,
@@ -112,7 +112,7 @@ def poll_delete_view(request,id):
 
 @login_required
 def poll_results_list(request):
-    qs = Poll.objects.filter(active=False,department=request.user.info.department,join=request.user.info.join_year)
+    qs = Poll.objects.filter(active=False,department=request.user.info.department,join=request.user.info.join_year).order_by('-updated')
     return render(request,'polling/poll-results-list.html',{'object_list':qs})
 
 

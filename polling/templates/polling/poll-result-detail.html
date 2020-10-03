@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<h3 class="mt-2"><em>Statement</em>: {{object.statement}}</h3>
+<a class="mt-2 inline-block" href="{% url 'polling:list' %}">Back to Live Polls</a>
+<hr>
+<h3><em>Statement</em>: {{object.statement}}</h3>
 <p>Started On {{object.timestamp|date:'d-m-Y H:i'}}</p>
 <p>Closed On {{object.updated|date:'d-m-Y H:i'}}</p>
 <hr>
@@ -12,11 +13,12 @@
         <div class="col-lg-6 col-md-8 col-sm-12 mb-2">
             <div class="progress my-2">
                 {% with "width: "|add:option.percent|add:"%" as percent_style %}
-            <div class="progress-bar bg-success" role="progressbar" style="{{percent_style}}" aria-valuenow="{{option.percent}}" aria-valuemin="0" aria-valuemax="100">{{option.percent}}</div>
+            <div class="progress-bar bg-success" role="progressbar" style="{{percent_style}}" aria-valuenow="{{option.percent}}" aria-valuemin="0" aria-valuemax="100">{{option.percent}}%</div>
                 {% endwith %}
             </div>
         </div>
     </div>
 {% endfor %}
-
+<button type="button" class="btn btn-danger mb-3" data-toggle="modal" data-target="#deletePoll">Delete</button>
+{% include 'polling/modal_.html' with id=object.id %}
 {% endblock %}
