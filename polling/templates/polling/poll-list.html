@@ -20,7 +20,7 @@
             <div class="card-body">
                 {{object.statement}}
             </div>
-            <h6 class="card-subtitle mb-2 text-muted">{{object.timestamp|date:'d-m-Y H:i'}}</h6>
+            <h6 class="card-subtitle mb-2 ml-2 text-muted">{{object.timestamp|date:'d-m-Y H:i'}}</h6>
             <a class="btn btn-primary" href="{% url 'polling:detail' object.id %}">View</a>
         </div>
     </div>

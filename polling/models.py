@@ -20,3 +20,29 @@ class Poll(models.Model):
     def __str__(self):
         return f"{self.statement[:20]} by {self.user}"
     
+
+class OptionCount(models.Model):
+    option = models.ForeignKey(Option,on_delete=models.CASCADE)
+    count = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return f'Count of {self.option}'
+
+
+
+class PollResult(models.Model):
+    poll = models.ForeignKey(Poll,on_delete=models.CASCADE,related_name='result')
+    option_count = models.ManyToManyField(OptionCount)
+    voted_users = models.ManyToManyField('UserPoll')
+
+    def __str__(self):
+        return f'Result of {self.poll}'
+
+    
+class UserPoll(models.Model):
+    user = models.ForeignKey(UserInfo,on_delete=models.CASCADE)
+    poll = models.ForeignKey(PollResult,on_delete=models.CASCADE)
+    option = models.ForeignKey(OptionCount,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.user} selected {self.option.option}'
