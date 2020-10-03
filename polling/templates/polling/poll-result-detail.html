@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3 class="mt-2"><em>Statement</em>: {{object.statement}}</h3>
+<p>Started On {{object.timestamp|date:'d-m-Y H:i'}}</p>
+<p>Closed On {{object.updated|date:'d-m-Y H:i'}}</p>
+<hr>
+{% for option in options %}
+    <p>Option {{forloop.counter}}: {{option.text}} (Votes: {{option.number}})</p>
+    <div class="row">
+        <div class="col-lg-6 col-md-8 col-sm-12 mb-2">
+            <div class="progress my-2">
+                {% with "width: "|add:option.percent|add:"%" as percent_style %}
+            <div class="progress-bar bg-success" role="progressbar" style="{{percent_style}}" aria-valuenow="{{option.percent}}" aria-valuemin="0" aria-valuemax="100">{{option.percent}}</div>
+                {% endwith %}
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+{% endblock %}

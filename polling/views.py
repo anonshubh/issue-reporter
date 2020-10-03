@@ -108,3 +108,38 @@ def poll_delete_view(request,id):
     poll_obj.delete()
     messages.info(request,"Poll has Been Deleted!")
     return redirect("polling:list")
+
+
+@login_required
+def poll_results_list(request):
+    qs = Poll.objects.filter(active=False,department=request.user.info.department,join=request.user.info.join_year)
+    return render(request,'polling/poll-results-list.html',{'object_list':qs})
+
+
+@login_required
+def poll_result_detail(request,id):
+    object = get_object_or_404(Poll,pk=id)
+    options_obj = object.options.all()
+    total_votes = 0
+    for i in options_obj:
+        try:
+            temp = i.count.all().first().count
+            total_votes+=temp
+        except:
+            continue
+    options = []
+    for i in options_obj:
+        temp_list = {}
+        opt_percent = 0.0
+        opt_number = 0
+        try:
+            opt_percent = ((i.count.all().first().count)/total_votes)*100
+            opt_number = i.count.all().first().count
+        except:
+            pass
+        opt_text = i.text
+        temp_list["percent"] = str(opt_percent)
+        temp_list["number"] = opt_number
+        temp_list["text"] = opt_text
+        options.append(temp_list)
+    return render(request,'polling/poll-result-detail.html',{'object':object,'options':options})
