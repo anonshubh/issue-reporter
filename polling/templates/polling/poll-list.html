@@ -8,9 +8,9 @@
 <h3 class="mt-2">Welcome, {{request.user.first_name}} {{request.user.last_name}}</h3>
 
 {% if request.user.info.is_cr %}
-<a class="btn btn-success btn-sm" href="{% url 'polling:create' %}">Create Poll</a>
-<a class="btn btn-danger btn-sm" href="#">Closed Polls</a>
+<a class="btn btn-primary btn-sm" href="{% url 'polling:create' %}">Create Poll</a>
 {% endif %}
+<a class="btn btn-success btn-sm" href="#">Results</a>
 <hr>
 <h2 class="mt-2 text-center">Live Polls</h2>
 <div class="row">

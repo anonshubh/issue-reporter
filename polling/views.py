@@ -17,6 +17,8 @@ def polling_list_view(request):
 @login_required
 def polling_detail_view(request,id):
     object = get_object_or_404(Poll,pk=id)
+    if(not object.active):
+        raise PermissionDenied
     options = object.options.all()
     return render(request,'polling/poll-detail.html',{"object":object,'options':options})
 
@@ -82,3 +84,27 @@ def poll_submit_view(request):
         messages.success(request,"Your Option has Been Submitted!")
         return redirect("polling:list")
     raise PermissionDenied
+
+
+@login_required
+def poll_close_view(request,id):
+    if(not request.user.info.is_cr):
+        raise PermissionDenied
+    poll_obj = get_object_or_404(Poll,pk=id)
+    poll_obj.active = False
+    poll_obj.save()
+    messages.info(request,"Poll has Been Closed!")
+    return redirect("polling:list")
+
+
+@login_required
+def poll_delete_view(request,id):
+    if(not request.user.info.is_cr):
+        raise PermissionDenied
+    poll_obj = get_object_or_404(Poll,pk=id)
+    options = poll_obj.options.all()
+    for i in options:
+        i.delete()
+    poll_obj.delete()
+    messages.info(request,"Poll has Been Deleted!")
+    return redirect("polling:list")
