@@ -16,13 +16,14 @@
 
 **For Developers**
 (Built Using Django)
-1) Website consists of 2 django apps, profiles and reporter.
+1) Website consists of 3 django apps, profiles, polling and reporter.
 2) User Authentication is implemented in profiles App.
 3) Issue Reporting is implemented in reporters App.
-4) All django templates are inheriting from ~/templates/base.html
-5) User Authentications templates are at Global Project Level.
-6) Issue Reporting templates are Local to reporter App.
-7) Upvotes and Downvotes are asynchronous implemented with VanillaJS only.
+4) User Polls Functionality is implemented in Polling App.
+5) All django templates are inheriting from ~/templates/base.html
+6) User Authentications templates are at Global Project Level.
+7) Issue Reporting templates are Local to reporter App.
+8) Upvotes and Downvotes are asynchronous implemented with VanillaJS only.
 
 **Technology Stack**
 ---
