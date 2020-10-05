@@ -19,7 +19,7 @@
     <div class="container">
         <div class="row mb-3">
             <div class="col-sm-6 col-lg-3 mt-1">
-                <a class="rcolor" href="{% url 'reporter:issue-form' %}">Add New Issue</a>
+                <a class="btn btn-primary btn-sm" href="{% url 'reporter:issue-form' %}">Add New Issue</a>
             </div>
             <div class="col-sm-6 col-lg-6 mt-1">
                 <a class="btn btn-primary btn-sm" href="{% url 'reporter:contact-list' %}">Contact List</a>
@@ -27,11 +27,11 @@
         </div>
         <div class="row">
             <div class="col-sm-6 col-lg-3 mt-2">
-                <a class="" href="{% url 'reporter:resolved' %}">Resolved</a>
+                <a class="btn btn-success btn-sm" class="" href="{% url 'reporter:resolved' %}">Resolved</a>
             </div>
             {% if request.user.info.is_cr %}
             <div class="col-sm-6 col-lg-3 mt-2"> 
-                <a href="{% url 'reporter:close-stage' %}">Closed</a>
+                <a class="btn btn-warning btn-sm" href="{% url 'reporter:close-stage' %}">Closed</a>
             </div>
             <div class="col-sm-6 col-lg-3 mt-2">
                 <a class=" btn btn-primary btn-sm" href="{% url 'reporter:contact-pending' %}">Pending List</a>
@@ -53,7 +53,7 @@
           <p class="card-text">Posted on: {{issue.timestamp|date:'d-m-Y H:i'}}</p>
         </div>
         <div class="vote" data-id="{{issue.id}}">
-            <button data-id="{{issue.id}}" class="upvote btn btn-link">Upvote</button>
+            <button data-id="{{issue.id}}" class="upvote btn  btn-link">Upvote</button>
             <button data-id="{{issue.id}}" class="downvote btn btn-link">Downvote</button>
             <button data-id="{{issue.id}}" class="upvoted btn btn-link">Upvoted</button>
             <button data-id="{{issue.id}}" class="downvoted btn btn-link">Downvoted</button>
