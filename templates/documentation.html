@@ -1,26 +1,20 @@
 {% extends 'base.html' %}
 
+{% block title %}Documentation{% endblock %}
+
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentation</title>
-</head>
-<body>
-    <h1 style="text-align: center;">TeamEzi! Documented</h1>
-    <p style="text-indent: 80px;">Hi!Welcome to TeamEzi!If there is something you don't understand,this is the place to come to!After you log in to the site,you see many buttons.You wonder,what does this button do?This is where it gets answered.</p>
+    <h1 class="text-center mt-2"">TeamEzi! Documented</h1>
+    <p>Hi! Welcome to TeamEzi! If there is something you don't understand,this is the place to come to!After you log in to the site,you see many buttons.You wonder,what does this button do?This is where it gets answered.</p>
     <ul>
         <li>
             <div class="text-center">
-                <a class="btn btn-primary btn-sm">Add New Issue</a>
+                <a class="btn btn-primary btn-sm mb-2">Add New Issue</a>
             </div>
             <p>Facing any issue in the class?Just post about your problem and what your desired solution is and then your classmates can express their agreement and disagreement using the upvote and downvote buttons. </p><br><br>
         </li>
         <li>
             <div class="text-center">
-                <a class="btn btn-secondary btn-sm">Voting Data</a>
+                <a class="btn btn-secondary btn-sm mb-2">Voting Data</a>
             </div>
             <p><b>FOR CR ONLY:<br></b>After closing of the issue(when deadline is completed),the CR can see the statistics of the vote.He can see:</p>
             <ol>
@@ -36,8 +30,8 @@
             </ol>
             <li>
                 <div class="text-center">
-                    <a class="btn btn-primary btn-sm">Contact List</a>
-                    <a class="btn btn-primary btn-sm">Pending List</a>
+                    <a class="btn btn-primary btn-sm mb-2">Contact List</a>
+                    <a class="btn btn-primary btn-sm mb-2">Pending List</a>
                 </div>
                 <p>
                     Does anybody need the number or email id of a TA or Professor?This is where you will find it.Now you may wonder,how can you add to this list?When you go into the list,you will find a link at the top asking to add new contacts.On clicking that,you will be redirected to a form.On the submission of the form,your submission will be put on the Pending list,which will be then approved by the CR's before being added.
@@ -45,8 +39,8 @@
             </li>
         <li>
             <div class="text-center">
-                <a class="btn btn-warning">Closed</a>
-                <a class="btn btn-success">Resolved</a>
+                <a class="btn btn-warning btn-sm mb-2">Closed</a>
+                <a class="btn btn-success btn-sm mb-2">Resolved</a>
             </div>
             <p>
                 After you have posted your issue,your CR may have put a deadline on voting.After the deadline is passed,the issue is <b>OFFICIALLY</b> closed.You can no longer vote on it.Now,it's in the hands of your CR.Once they finish working on the solution,it will be moved into the <b>RESOLVED</b> category.
@@ -54,15 +48,13 @@
         </li>
         <li>
             <div class="text-center">
-                <a class="btn btn-secondary">Live Polls</a>
-                <a class="btn btn-primary">Create a Poll</a>
-                <a class="btn btn-success">Results</a>
+                <a class="btn btn-secondary btn-sm mb-2">Live Polls</a>
+                <a class="btn btn-primary btn-sm mb-2">Create a Poll</a>
+                <a class="btn btn-success btn-sm mb-2">Results</a>
             </div>
             <p>
                 Suppose you have a test coming up,but the Professor has asked you to pick the date?You have many options!!Which one to choose?This is where the poll feature comes in.You add a new poll,with a number of options,and then wait for others to vote.Before the closure of the poll,nobody can know the current status,even the CR!After that,the results will be on display using the Results Button.
             </p>
         </li>
     </ul>
-</body>
-</html>
 {% endblock %}
