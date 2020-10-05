@@ -290,3 +290,6 @@ def feedback_view(request):
             messages.error(request,"Invalid Data!, Please Re-Fill the Form")
             return redirect("reporter:feed-back")
     return render(request,'reporter/feedback-form.html',{'form':form})
+
+def documentation_view(request):
+    return render(request,'documentation.html')
