@@ -16,7 +16,7 @@
 
 **For Developers**
 (Built Using Django)
-1) Website consists of 3 django app profiles, polling and reporter.
+1) Website consists of 3 django apps profiles, polling and reporter.
 2) User Authentication is implemented in profiles App.
 3) Issue Reporting is implemented in reporters App.
 4) User Polls Functionality is implemented in Polling App.
