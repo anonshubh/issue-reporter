@@ -11,7 +11,7 @@
 4) `python manage.py runserver`
 
 **For Users**
-1) Test-user is Made in Production with username as testuser and password as demouser@123
+1) Test-user is with username as testuser and password as demouser@123
 2) Test-user has all functionalities which are possessed by CRs/Team Leads
 
 **For Developers**
