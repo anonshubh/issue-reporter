@@ -2,23 +2,35 @@
     display: none;
     color: white;
 }
-
+.upvote:hover{
+    text-decoration: none;
+    color: white;
+}
 .downvote{
     display: none;
     color: white;
 }
-
+.downvote:hover{
+    text-decoration: none;
+    color: white;
+}
 .upvoted{
     display: none;
     color: white;
     
 }
-
+.upvoted:hover{
+    text-decoration: none;
+    color: white;
+}
 .downvoted{
     display: none;
     color: white;
 }
-
+.downvoted:hover{
+    text-decoration: none;
+    color: white;
+}
 body{
     /* background: #6190E8;  
     background: -webkit-linear-gradient(to right, #A7BFE8, #6190E8);  
