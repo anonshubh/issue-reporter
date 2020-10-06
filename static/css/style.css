@@ -1,22 +1,22 @@
 .upvote{
     display: none;
-    color: green;
+    color: white;
 }
 
 .downvote{
     display: none;
-    color: red;
+    color: white;
 }
 
 .upvoted{
     display: none;
-    color: green;
+    color: white;
     
 }
 
 .downvoted{
     display: none;
-    color: red;
+    color: white;
 }
 
 body{
