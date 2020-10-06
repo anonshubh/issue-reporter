@@ -35,7 +35,6 @@ body{
     background: linear-gradient(to right, #1D2671, #C33764); */
     
     font-family: 'Ubuntu', sans-serif;
-    height: 1500px;
 }
 
 .rcolor{
@@ -97,13 +96,11 @@ body{
 }
 
 .statement-card{
-    /* position: relative; */
     height: 370px;
+    width: 310px;
     background: #060c21;
-    /* justify-content: center;
-    align-items: center;  */
     border: 1px solid #000;
-    
+    cursor: pointer;
 }
 
 .statement-card::before{
@@ -146,12 +143,11 @@ body{
 }
 
 .answer-card{
-    position: relative;
     height: 370px;
+    width: 310px;
     background: #060c21;
-    justify-content: center;
-    align-items: center;
     border: 1px solid #000;
+    cursor: pointer;
 }
 .answer-card::before{
     content: '';
@@ -198,7 +194,7 @@ body{
 }
 .outer{
     position: relative;
-    width: 100%;
+    width: 94%;
     height: 72px;
     display: flex;
     margin: 15px;
@@ -207,7 +203,7 @@ body{
 }
 .outer .problemstatement{
     position: relative;
-    width: 400px;
+    width: 350px;
     height: 72px;
     display: flex;
     align-items: center;
@@ -228,7 +224,7 @@ body{
 }
 .outer .problemstatement .but h2{
     position: relative;
-    padding-left: 48px;
+    padding-left: 27px;
     padding-top: 10px;
     color: #fff;
     font-size: 1.5rem;
@@ -247,4 +243,8 @@ body{
     padding: 0;
     color: #fff;
     font-size: 16px;
+}
+
+.unline-remove:hover{
+    text-decoration: none;
 }
