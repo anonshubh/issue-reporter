@@ -19,6 +19,8 @@
         </div>
     </div>
 {% endfor %}
+{% if request.user.info.is_cr %}
 <button type="button" class="btn btn-danger mb-3" data-toggle="modal" data-target="#deletePoll">Delete</button>
 {% include 'polling/modal_.html' with id=object.id %}
+{% endif %}
 {% endblock %}
