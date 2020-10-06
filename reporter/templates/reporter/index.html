@@ -53,10 +53,10 @@
           <p class="card-text">Posted on: {{issue.timestamp|date:'d-m-Y H:i'}}</p>
         </div>
         <div class="vote" data-id="{{issue.id}}">
-            <button data-id="{{issue.id}}" class="ml-3 upvote btn btn-secondary btn-link">Upvote</button>
-            <button data-id="{{issue.id}}" class="ml-3 downvote btn btn-secondary btn-link">Downvote</button>
-            <button data-id="{{issue.id}}" class="ml-3 upvoted btn btn-success btn-link">Upvoted</button>
-            <button data-id="{{issue.id}}" class="ml-3 downvoted btn btn-danger btn-link">Downvoted</button>
+            <button data-id="{{issue.id}}" class="ml-3 mb-2 upvote btn btn-secondary btn-link">Upvote</button>
+            <button data-id="{{issue.id}}" class="ml-3 mb-2 downvote btn btn-secondary btn-link">Downvote</button>
+            <button data-id="{{issue.id}}" class="ml-3 mb-2 upvoted btn btn-success btn-link">Upvoted</button>
+            <button data-id="{{issue.id}}" class="ml-3 mb-2 downvoted btn btn-danger btn-link">Downvoted</button>
             <!-- {% if request.user.info.is_cr %}
                 <span>UpVotes: {{issue.upvotes}}</span>
                 <span>DownVotes: {{issue.downvotes}}</span>
