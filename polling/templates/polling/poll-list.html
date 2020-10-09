@@ -4,13 +4,13 @@
 
 <h2 class="mt-3 text-center">TeamEzI Resolved</h2>
 <h4 class="inline-block">Department: {{request.user.info.department|upper}} {{request.user.info.join_year}}</h4>
-<a class="btn btn-secondary ml-3 " href="{% url 'reporter:index' %}">Issues</a>
+<a class="btn btn-secondary ml-3 " href="{% url 'reporter:index' %}"><i class="fa fa-exclamation-circle"></i> Issues</a>
 <h3 class="mt-2">Welcome, {{request.user.first_name}} {{request.user.last_name}}</h3>
 
 {% if request.user.info.is_cr %}
-<a class="btn btn-primary btn-sm" href="{% url 'polling:create' %}">Create Poll</a>
+<a class="btn btn-primary btn-sm" href="{% url 'polling:create' %}"><i class="fa fa-plus-square"></i> Create Poll</a>
 {% endif %}
-<a class="btn btn-success btn-sm" href="{% url 'polling:result-list' %}">Results</a>
+<a class="btn btn-success btn-sm" href="{% url 'polling:result-list' %}"><i class="fa fa-file-text-o"></i> Results</a>
 <hr>
 <h2 class="mt-2 text-center">Live Polls</h2>
 <div class="row">
@@ -21,7 +21,7 @@
                 {{object.statement}}
             </div>
             <h6 class="card-subtitle mb-2 ml-2 text-muted">{{object.timestamp|date:'d-m-Y H:i'}}</h6>
-            <a class="btn btn-primary" href="{% url 'polling:detail' object.id %}">View</a>
+            <a class="btn btn-primary" href="{% url 'polling:detail' object.id %}"><i class="fa fa-eye"></i> View</a>
         </div>
     </div>
     {% empty %}

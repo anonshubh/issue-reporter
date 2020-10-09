@@ -2,7 +2,7 @@
 
 {% block content %}
 <h2 class="mt-2 text-center">Poll</h2>
-<a class="mt-2 inline-block" href="{% url 'polling:list' %}">Back to Live Polls</a>
+<a class="mt-2 inline-block" href="{% url 'polling:list' %}"><i class="fa fa-arrow-left"></i> Live Polls</a>
 <p>Your Vote is Anonymized!</p>
 <hr>
 <div class="row">
@@ -25,8 +25,8 @@
     </form>
 </div>
 {% if request.user.info.is_cr %}
-<a class="btn btn-success mb-3" href="{% url 'polling:close' object.id %}">Close Poll</a>
-<button type="button" class="btn btn-danger mb-3" data-toggle="modal" data-target="#deletePoll">Delete</button>
+<a class="btn btn-success mb-3" href="{% url 'polling:close' object.id %}"><i class="fa fa-ban"></i> Close Poll</a>
+<button type="button" class="btn btn-danger mb-3" data-toggle="modal" data-target="#deletePoll"><i class="fa fa-trash-o"></i> Delete</button>
 {% endif %}
 {% include 'polling/modal_.html' with id=object.id %}
 {% endblock %}

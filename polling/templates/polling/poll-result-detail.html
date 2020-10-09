@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<a class="mt-2 inline-block" href="{% url 'polling:list' %}">Back to Live Polls</a>
+<a class="mt-2 inline-block" href="{% url 'polling:list' %}"><i class="fa fa-arrow-left"></i> Live Polls</a>
 <hr>
 <h3><em>Statement</em>: {{object.statement}}</h3>
 <p>Started On {{object.timestamp|date:'d-m-Y H:i'}}</p>
@@ -20,7 +20,7 @@
     </div>
 {% endfor %}
 {% if request.user.info.is_cr %}
-<button type="button" class="btn btn-danger mb-3" data-toggle="modal" data-target="#deletePoll">Delete</button>
+<button type="button" class="btn btn-danger mb-3" data-toggle="modal" data-target="#deletePoll"><i class="fa fa-trash-o"></i> Delete</button>
 {% include 'polling/modal_.html' with id=object.id %}
 {% endif %}
 {% endblock %}
