@@ -21,13 +21,14 @@
      <!-- Google Fonts -->
      <!-- <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet"> -->
      <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet"> 
-   
+    <!-- cdn link from font-awesome -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <title>{% block title %}Let's Resolve{% endblock %}</title>
   </head>
   <body>
 
       <nav style="background-color:rgba(63, 61, 61, 0.89) ;" class="navbar navbar-expand-lg navbar-dark sticky-top">
-        <a class="navbar-brand" href="{% url 'reporter:index' %}">Resolver</a>
+        <a class="navbar-brand" href="{% url 'reporter:index' %}"><i class="fa fa-home"></i> Resolver</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -35,14 +36,14 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link my-1 mr-2 text-center" href="{% url 'reporter:documentation' %}">Need Help?</a>
+              <a class="nav-link my-1 mr-2 text-center" href="{% url 'reporter:documentation' %}"><i class="fa fa-question-circle-o"></i> Need Help?</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link my-1 mr-2 text-center" href="{% url 'reporter:about' %}">About Us<span class="sr-only">(current)</span></a>
+              <a class="nav-link my-1 mr-2 text-center" href="{% url 'reporter:about' %}"><i class="fa fa-users"></i> About Us<span class="sr-only">(current)</span></a>
             </li>
             {% if request.user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link btn btn-success" href="{% url 'account_logout' %}">Log Out</a>
+              <a class="nav-link btn btn-success" href="{% url 'account_logout' %}"><i class="fa fa-power-off"></i> Log Out</a>
             </li>
             {% else %}
             <li class="nav-item">

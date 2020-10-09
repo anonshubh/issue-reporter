@@ -14,30 +14,30 @@
     {% endif %}
     {% if request.user.is_authenticated %}
     <h4 class="inline-block">Department: {{request.user.info.department|upper}} {{request.user.info.join_year}}</h4>
-    <a class="btn btn-secondary ml-3 " href="{% url 'polling:list' %}">Live Polls</a>
+    <a class="btn btn-secondary ml-3 " href="{% url 'polling:list' %}"><i class="fa fa-bar-chart"></i> Live Polls</a>
     <h3 class="mt-2">Welcome, {{request.user.first_name}} {{request.user.last_name}}</h3>
     <div class="container">
         <div class="row mb-3">
             <div class="col-sm-6 col-lg-3 mt-1">
-                <a class="btn btn-primary btn-sm" href="{% url 'reporter:issue-form' %}">Add New Issue</a>
+                <a class="btn btn-primary btn-sm" href="{% url 'reporter:issue-form' %}"><i class="fa fa-pencil"></i> Add New Issue</a>
             </div>
             <div class="col-sm-6 col-lg-6 mt-1">
-                <a class="btn btn-primary btn-sm" href="{% url 'reporter:contact-list' %}">Contact List</a>
+                <a class="btn btn-primary btn-sm" href="{% url 'reporter:contact-list' %}"><i class="fa fa-user-circle"></i> Contact List</a>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-6 col-lg-3 mt-2">
-                <a class="btn btn-success btn-sm" href="{% url 'reporter:resolved' %}">Resolved</a>
+                <a class="btn btn-success btn-sm" href="{% url 'reporter:resolved' %}"><i class="fa fa-check-square-o"></i> Resolved</a>
             </div>
             {% if request.user.info.is_cr %}
             <div class="col-sm-6 col-lg-3 mt-2"> 
-                <a class="btn btn-warning btn-sm" href="{% url 'reporter:close-stage' %}">Closed</a>
+                <a class="btn btn-warning btn-sm" href="{% url 'reporter:close-stage' %}"><i class="fa fa-lock"></i> Closed</a>
             </div>
             <div class="col-sm-6 col-lg-3 mt-2">
-                <a class=" btn btn-primary btn-sm" href="{% url 'reporter:contact-pending' %}">Pending List</a>
+                <a class=" btn btn-primary btn-sm" href="{% url 'reporter:contact-pending' %}"><i class="fa fa-clock-o"></i> Pending List</a>
             </div>
             <div class="col-sm-6 col-lg-3 mt-2">
-                <a class="btn btn-secondary btn-sm" href="{% url 'reporter:voted-list' %}">Voting Data</a>
+                <a class="btn btn-secondary btn-sm" href="{% url 'reporter:voted-list' %}"><i class="fa fa-list-alt"></i> Voting Data</a>
             </div>
             {% endif %}
         </div>
@@ -53,10 +53,10 @@
           <p class="card-text">Posted on: {{issue.timestamp|date:'d-m-Y H:i'}}</p>
         </div>
         <div class="vote" data-id="{{issue.id}}">
-            <button data-id="{{issue.id}}" class="ml-3 mb-2 upvote btn btn-secondary btn-link">Upvote</button>
-            <button data-id="{{issue.id}}" class="ml-3 mb-2 downvote btn btn-secondary btn-link">Downvote</button>
-            <button data-id="{{issue.id}}" class="ml-3 mb-2 upvoted btn btn-success btn-link">Upvoted</button>
-            <button data-id="{{issue.id}}" class="ml-3 mb-2 downvoted btn btn-danger btn-link">Downvoted</button>
+            <button data-id="{{issue.id}}" class="ml-3 mb-2 upvote btn btn-secondary btn-link"><i class="fa fa-thumbs-o-up"></i> Upvote</button>
+            <button data-id="{{issue.id}}" class="ml-3 mb-2 downvote btn btn-secondary btn-link"><i class="fa fa-thumbs-o-down"></i> Downvote</button>
+            <button data-id="{{issue.id}}" class="ml-3 mb-2 upvoted btn btn-success btn-link"> <i class="fa fa-thumbs-o-up"></i> Upvoted</button>
+            <button data-id="{{issue.id}}" class="ml-3 mb-2 downvoted btn btn-danger btn-link"><i class="fa fa-thumbs-o-down"></i> Downvoted</button>
             <!-- {% if request.user.info.is_cr %}
                 <span>UpVotes: {{issue.upvotes}}</span>
                 <span>DownVotes: {{issue.downvotes}}</span>

@@ -16,8 +16,7 @@
 }
 .upvoted{
     display: none;
-    color: white;
-    
+    color: white;    
 }
 .upvoted:hover{
     text-decoration: none;
