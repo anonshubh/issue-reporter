@@ -25,8 +25,8 @@
     <title>{% block title %}Let's Resolve{% endblock %}</title>
   </head>
   <body>
-    <section>
-      <nav style="background-color:rgba(63, 61, 61, 0.89) ;" class="navbar navbar-expand-lg navbar-dark">
+
+      <nav style="background-color:rgba(63, 61, 61, 0.89) ;" class="navbar navbar-expand-lg navbar-dark sticky-top">
         <a class="navbar-brand" href="{% url 'reporter:index' %}">Resolver</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -55,7 +55,7 @@
           </ul>
         </div>
       </nav>
-    </section>
+
     <div class="container">
       {% include 'messages_.html' %}
       {% block content %} {% endblock %}
