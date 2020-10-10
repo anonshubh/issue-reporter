@@ -68,8 +68,11 @@ def poll_submit_view(request):
         for i in voted_users:
             voted_users_obj.append(i.user)
         if(user in voted_users_obj):
-            already_voted_user = UserPoll.objects.get(user=user)
+            already_voted_user = UserPoll.objects.get(user=user,poll=poll_result)   
             voted_option = already_voted_user.option
+            if(voted_option==option_count):
+                messages.success(request,"Your Option has Been Submitted!")
+                return redirect("polling:list")
             voted_option.count-=1
             voted_option.save()
             already_voted_user.option = option_count
@@ -78,7 +81,6 @@ def poll_submit_view(request):
             new_vote_user = UserPoll.objects.create(user=user,poll=poll_result,option=option_count)
             poll_result.voted_users.add(new_vote_user)
             poll_result.save()
-
         option_count.count+=1
         option_count.save()
         messages.success(request,"Your Option has Been Submitted!")
