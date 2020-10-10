@@ -20,8 +20,10 @@
         {% empty %}
         <p class="lead ml-2">No Option Available!</p>
         {% endfor %}
+        {% if options %}
         <input class="btn btn-primary ml-2" type="submit" value="Submit">
         <p class="lead mt-2 ml-2">If already Submitted, Re-Submit to Update your Vote!</p>
+        {% endif %}
     </form>
 </div>
 {% if request.user.info.is_cr %}
