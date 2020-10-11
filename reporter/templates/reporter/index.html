@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
+{% load mathfilters %}
 {% block content %}
 
 <div>
@@ -57,11 +58,12 @@
             <button data-id="{{issue.id}}" class="ml-3 mb-2 downvote btn btn-secondary btn-link"><i class="fa fa-thumbs-o-down"></i> Downvote</button>
             <button data-id="{{issue.id}}" class="ml-3 mb-2 upvoted btn btn-success btn-link"> <i class="fa fa-thumbs-o-up"></i> Upvoted</button>
             <button data-id="{{issue.id}}" class="ml-3 mb-2 downvoted btn btn-danger btn-link"><i class="fa fa-thumbs-o-down"></i> Downvoted</button>
-            <!-- {% if request.user.info.is_cr %}
-                <span>UpVotes: {{issue.upvotes}}</span>
-                <span>DownVotes: {{issue.downvotes}}</span>
-            {% endif %} -->
         </div>
+        {% if request.user.info.is_cr %}
+            {% with upvote=issue.upvotes|abs downvote=issue.downvotes|abs %}
+            <span class="ml-2"><em>Live Votes: {{upvote|add:downvote}}</em></span>
+            {% endwith %}
+        {% endif %}
         {% if issue.deadline %}
             <p class="deadline-date ml-2"><em>Deadline: </em>{{issue.deadline}}</p>
             {% if request.user.info.is_cr %}

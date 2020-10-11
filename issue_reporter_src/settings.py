@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'crispy_forms',
+    'mathfilters',
     #local
     'profiles.apps.ProfilesConfig',
     'reporter.apps.ReporterConfig',
