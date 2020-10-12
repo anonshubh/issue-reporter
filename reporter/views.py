@@ -309,7 +309,7 @@ def send_remainder_mail_view(request):
     for i in qs:
         class_list.append(i.user.email)
     send_mail(
-    'Remainder',
+    'Reminder',
     'Kindly Vote your Opinion!, if Done ignore this Mail.',
     'teameziportal@gmail.com',
     class_list,
