@@ -8,6 +8,7 @@ urlpatterns=[
     path('about-us/',views.about_view,name='about'),
     path('feed-back/',views.feedback_view,name='feed-back'),
     path('documentation/',views.documentation_view,name='documentation'),
+    path('send-mail/',views.send_remainder_mail_view,name='mail'),
 
     path('report/',views.issue_form_view,name='issue-form'),
     path('close-stage/<int:pk>/',views.close_issue_view,name='close-issue'),

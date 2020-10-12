@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseNotAllowed,JsonResponse,HttpResponseServerError
 from django.core.exceptions import PermissionDenied
 from django.contrib import messages
+from django.core.mail import send_mail
 import json, datetime, pytz
 
 from .models import Report , Vote, ContactList
@@ -291,5 +292,28 @@ def feedback_view(request):
             return redirect("reporter:feed-back")
     return render(request,'reporter/feedback-form.html',{'form':form})
 
+
 def documentation_view(request):
     return render(request,'documentation.html')
+
+
+@login_required
+def send_remainder_mail_view(request):
+    if(not request.user.info.is_cr):
+        raise PermissionDenied
+    if(request.user.username=='testuser'):
+        messages.info(request,"Feature not Supported for Test User!")
+        return redirect("reporter:index")
+    class_list = []
+    qs = UserInfo.objects.filter(department=request.user.info.department,join_year=request.user.info.join_year)
+    for i in qs:
+        class_list.append(i.user.email)
+    send_mail(
+    'Remainder',
+    'Kindly Vote your Opinion!, if Done ignore this Mail.',
+    'teameziportal@gmail.com',
+    class_list,
+    fail_silently=False,
+    )
+    messages.success(request,"Mail has Been Sent!")
+    return redirect("reporter:index")
