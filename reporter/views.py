@@ -308,12 +308,15 @@ def send_remainder_mail_view(request):
     qs = UserInfo.objects.filter(department=request.user.info.department,join_year=request.user.info.join_year)
     for i in qs:
         class_list.append(i.user.email)
-    send_mail(
-    'Reminder',
-    'Kindly Vote your Opinion!, if Done ignore this Mail.',
-    'teameziportal@gmail.com',
-    class_list,
-    fail_silently=False,
-    )
-    messages.success(request,"Mail has Been Sent!")
+    try:
+        send_mail(
+        'Reminder',
+        'Kindly Vote your Opinion!, if Done ignore this Mail.',
+        'teameziportal@gmail.com',
+        class_list,
+        fail_silently=False,
+        )
+        messages.success(request,"Mail has Been Sent!")
+    except:
+        messages.error(request,"Limited Exceeded for the Day!")
     return redirect("reporter:index")
