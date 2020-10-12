@@ -4,6 +4,7 @@ from django.http import HttpResponseNotAllowed,JsonResponse,HttpResponseServerEr
 from django.core.exceptions import PermissionDenied
 from django.contrib import messages
 from django.core.mail import send_mail
+from django.conf import settings
 import json, datetime, pytz
 
 from .models import Report , Vote, ContactList
@@ -308,15 +309,12 @@ def send_remainder_mail_view(request):
     qs = UserInfo.objects.filter(department=request.user.info.department,join_year=request.user.info.join_year)
     for i in qs:
         class_list.append(i.user.email)
-    try:
-        send_mail(
-        'Reminder',
-        'Kindly Vote your Opinion!, if Done ignore this Mail.',
-        'teameziportal@gmail.com',
-        class_list,
-        fail_silently=False,
-        )
-        messages.success(request,"Mail has Been Sent!")
-    except:
-        messages.error(request,"Limited Exceeded for the Day!")
+    send_mail(
+    'Reminder',
+    'Kindly Vote your Opinion!, if Done ignore this Mail.',
+    settings.DEFAULT_FROM_EMAIL,
+    class_list,
+    fail_silently=False,
+    )
+    messages.success(request,"Mail has Been Sent!")
     return redirect("reporter:index")
