@@ -54,20 +54,12 @@ INSTALLED_APPS = [
 
 
 #Smpt SendGrid
-# SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
-# EMAIL_HOST = 'smtp.sendgrid.net'
-# EMAIL_HOST_USER = 'apikey'
-# EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-
-#Smpt Gmail
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
+SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'teameziportal@gmail.com'
-EMAIL_HOST_PASSWORD = os.getenv('GMAIL_HOST_KEY')
-
+EMAIL_USE_TLS = True
 
 #Crispy-Forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
