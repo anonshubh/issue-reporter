@@ -2,6 +2,8 @@ from .models import Report,ContactList
 from polling.models import Poll
 
 def pending_issue_list_context(request):
+    if request.user.is_superuser:
+        return {}
     pending=-1
     if request.user.is_authenticated:
         pending = Report.objects.filter(active=False,department=request.user.info.department,year=request.user.info.join_year,resolved=False).count()
@@ -9,6 +11,8 @@ def pending_issue_list_context(request):
 
 
 def resolved_issue_list_context(request):
+    if request.user.is_superuser:
+        return {}
     resolved=-1
     if request.user.is_authenticated:
         resolved = Report.objects.filter(active=False,department=request.user.info.department,year=request.user.info.join_year,resolved=True).count()
@@ -16,6 +20,8 @@ def resolved_issue_list_context(request):
 
 
 def pending_contact_list_context(request):
+    if request.user.is_superuser:
+        return {}
     pending=-1
     if request.user.is_authenticated:
         pending = ContactList.objects.filter(department=request.user.info.department,year=request.user.info.join_year,approved=False).count()
@@ -23,6 +29,8 @@ def pending_contact_list_context(request):
 
 
 def live_polls_count_context(request):
+    if request.user.is_superuser:
+        return {}
     count = -1
     if request.user.is_authenticated:
         count = Poll.objects.filter(active=True,department=request.user.info.department,join=request.user.info.join_year).count()
