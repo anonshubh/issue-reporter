@@ -68,6 +68,8 @@ class RestrictEmailAdapter(DefaultAccountAdapter):
             raise ValidationError("No Mtech/PhD supported, Contact Admin!")
         if(domain=='gmail'):
             raise ValidationError("Use only Official Institute Email ID!")
+        if(email[index+1:]!='iiitdm.ac.in'):
+            raise ValidationError("Re-Check Email Address!")
         domain_qs = Institute.objects.filter(domain=domain)
         if(domain_qs.exists()):
             domain_obj = domain_qs.first().domain
