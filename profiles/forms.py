@@ -23,6 +23,8 @@ class CustomSignupForm(SignupForm):
         user = super(CustomSignupForm, self).save(request)
 
         email = str(user.email)
+        email = email.lower()
+        user.email = email
         index = email.find('@')
         dot = email.find('.')
         rollno = ""
