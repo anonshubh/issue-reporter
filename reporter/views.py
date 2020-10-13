@@ -73,6 +73,10 @@ def issue_form_view(request):
             instance.department = request.user.info.department
             instance.year = request.user.info.join_year
             instance.save()
+            qs = UserInfo.objects.filter(department=request.user.info.department,join_year=request.user.info.join_year)
+            for i in qs:
+                (i.total_novotes)+=1
+                i.save()
             return redirect('reporter:index')
     return render(request,'reporter/issue-form.html',{'form':form})
 
@@ -124,18 +128,22 @@ def vote_update_view(request):
             if(type=='upvote'):
                 (report_obj.upvotes)+=1
                 (userinfo_obj.total_upvotes)+=1
+                (userinfo_obj.total_novotes)-=1
                 vote_obj.type = 1
             elif(type=='downvote'):
                 (report_obj.downvotes)-=1
                 (userinfo_obj.total_downvotes)-=1
+                (userinfo_obj.total_novotes)-=1
                 vote_obj.type = 0
             elif(type=='downvoted'):
                 (report_obj.downvotes)+=1
                 (userinfo_obj.total_downvotes)+=1
+                (userinfo_obj.total_novotes)+=1
                 vote_obj.type = -1
             elif(type=='upvoted'):
                 (report_obj.upvotes)-=1
                 (userinfo_obj.total_upvotes)-=1
+                (userinfo_obj.total_novotes)+=1
                 vote_obj.type = -1
             report_obj.save()
             vote_obj.save()

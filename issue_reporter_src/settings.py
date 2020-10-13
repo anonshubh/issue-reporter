@@ -82,7 +82,9 @@ LOGOUT_REDIRECT_URL = "/"
 
 ACCOUNT_ADAPTER = 'profiles.forms.RestrictEmailAdapter'
 
-ADMINS = [('TeamEzi','teameziportal@gmail.com')]
+ADMINS = (  
+            ('TeamEzi','teameziportal@gmail.com'),
+    )
 
 DEFAULT_FROM_EMAIL = 'TeamEzi <teameziportal@gmail.com>'
 
