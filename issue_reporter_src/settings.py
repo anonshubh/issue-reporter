@@ -59,6 +59,8 @@ TINYMCE_DEFAULT_CONFIG = {
     'branding': False,
 }
 
+TINYMCE_INCLUDE_JQUERY = False  
+
 #Smpt SendGrid
 SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
 EMAIL_HOST = 'smtp.sendgrid.net'
