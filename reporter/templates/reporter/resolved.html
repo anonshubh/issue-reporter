@@ -12,7 +12,7 @@
         <div class="card-header">{{issue.user.user.first_name}} ({{issue.user.user.username}}) {% if issue.user.is_cr %}<strong>(CR)</strong>{% endif %} {% if request.user.info.is_cr %}<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">X</button>{% endif %}</div>
         <div class="card-body text-primary">
           <h5 class="card-title">{{issue.title}}</h5>
-          <p class="card-text" >{{issue.content}}</p>
+          <p class="card-text" >{{issue.content|safe}}</p>
           <p class="card-text">Resolved on: {{issue.updated|date:'d-m-Y H:i'}}</p>
           <p class="card-text resolve-message"><em>Resolved Message: </em><span style="color: black;">{{issue.cr_line}}</span></p>
         </div>

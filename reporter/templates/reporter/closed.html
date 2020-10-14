@@ -12,7 +12,7 @@
         <div class="card-header">{{issue.user.user.first_name}} ({{issue.user.user.username}}) {% if issue.user.is_cr %}<strong>(CR)</strong>{% endif %} {% if request.user.info.is_cr %}<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">X</button> <a class="btn btn-warning ml-2" href="{% url 'reporter:close-issue' issue.id %}">Open</a> {% endif %} {% if issue.cr_line %}<a class="btn btn-success" href="{% url 'reporter:resolve-issue' issue.id %}">Resolve</a>{% endif %}</div>
         <div class="card-body text-primary">
           <h5 class="card-title">{{issue.title}}</h5>
-          <p class="card-text" >{{issue.content}}</p>
+          <p class="card-text" >{{issue.content|safe}}</p>
           <p class="card-text">Posted on: {{issue.timestamp|date:'d-m-Y H:i'}}</p>
           {% if issue.cr_line %}
           <p class="card-text resolve-message"><em>Resolved Message: </em><span style="color: black;">{{issue.cr_line}}</span></p>

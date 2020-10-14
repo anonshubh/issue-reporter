@@ -46,12 +46,18 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'crispy_forms',
     'mathfilters',
+    'tinymce',
     #local
     'profiles.apps.ProfilesConfig',
     'reporter.apps.ReporterConfig',
     'polling.apps.PollingConfig',
 ]
 
+
+TINYMCE_DEFAULT_CONFIG = {
+    'plugins': "table,paste,searchreplace,link",
+    'branding': False,
+}
 
 #Smpt SendGrid
 SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')

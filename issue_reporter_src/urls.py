@@ -18,7 +18,10 @@ from django.urls import path,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    #External
     path('accounts/', include('allauth.urls')),
+    path('tinymce/', include('tinymce.urls')),
+    #Local
     path('',include('reporter.urls',namespace='reporter')),
     path('polling/',include('polling.urls',namespace='polling')),
 ]
