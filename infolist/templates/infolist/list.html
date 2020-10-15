@@ -7,10 +7,10 @@
 <a class="btn btn-secondary ml-3 mt-2" href="{% url 'reporter:index' %}"><i class="fa fa-exclamation-circle"></i> Issues</a>
 <h3 class="mt-2">Welcome, {{request.user.first_name}} {{request.user.last_name}}</h3>
 
-<a class="btn btn-primary btn-sm" href="{% url 'infolist:add-info' %}">Add New</a>
+<a class="btn btn-primary btn-sm" href="{% url 'infolist:add-info' %}"><i class="fa fa-plus-circle"></i> Add New</a>
 {% if request.user.info.is_cr %}
-<a class="btn btn-primary btn-sm" href="{% url 'infolist:add-subject' %}">Add New Subject</a>
-<a class="btn btn-success btn-sm" href="{% url 'infolist:pending' %}">Pending</a>
+<a class="btn btn-primary btn-sm" href="{% url 'infolist:add-subject' %}"><i class="fa fa-calendar-plus-o"></i> Add New Subject</a>
+<a class="btn btn-success btn-sm" href="{% url 'infolist:pending' %}"> <i class="fa fa-history"></i> Pending</a>
 {% endif %}
 <hr>
 <h2 class="mt-2 text-center">Information List</h2>
@@ -25,7 +25,7 @@
                 <h6 class="card-subtitle mb-2 text-muted">{{subject.subject}}</h6>
                 <p class="card-text">{{object.content|safe}}</p>
                 {% if request.user.info.is_cr or request.user.info == object.user %}
-                <a href="{% url 'infolist:delete' object.id %}" class="card-link btn btn-danger btn-sm">Delete</a>
+                <a href="{% url 'infolist:delete' object.id %}" class="card-link btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Delete</a>
                 {% endif %}
                 </div>
             </div>

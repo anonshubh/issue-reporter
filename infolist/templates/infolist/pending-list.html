@@ -2,7 +2,7 @@
 
 {% block content %}
 <h2 class="mt-2 text-center">Pending Information List</h2>
-<a href="{% url 'infolist:list' %}">Back to Info List</a>
+<a href="{% url 'infolist:list' %}"><i class="fa fa-arrow-left"></i> Info List</a>
 <hr>
 {% for objects,subject in object_list %}
     <p class="lead">{{subject.subject}}</p>
@@ -14,8 +14,8 @@
                 <h5 class="card-title">{{object.title}}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">{{subject.subject}}</h6>
                 <p class="card-text">{{object.content|safe}}</p>
-                <a href="{% url 'infolist:approve' object.id %}" class="card-link btn btn-success btn-sm">Approve</a>
-                <a href="{% url 'infolist:delete' object.id %}" class="card-link btn btn-danger btn-sm">Delete</a>
+                <a href="{% url 'infolist:approve' object.id %}" class="card-link btn btn-success btn-sm"><i class="fa fa-check-circle"></i> Approve</a>
+                <a href="{% url 'infolist:delete' object.id %}" class="card-link btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Delete</a>
                 </div>
             </div>
         </div>

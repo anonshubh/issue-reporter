@@ -3,7 +3,7 @@
 
 {% block content %}
 <h2 class="mt-2">Add New Subject</h2>
-<a href="{% url 'infolist:list' %}">Back to Info List</a>
+<a href="{% url 'infolist:list' %}"><i class="fa fa-arrow-left"></i> Info List</a>
 <hr>
 <div class="row">
     <div class="col-lg-6 col-md-8 col-sm-12">
@@ -19,7 +19,7 @@
         <p class="lead mt-2">Added Subjects</p>
         {% for object in subjects %}
         <div>
-            <p><span>{{forloop.counter}}.</span> {{object.subject}}<a class="btn btn-danger btn-sm ml-2" href="{% url 'infolist:delete-subject' object.id %}">Remove</a></p>
+            <p><span>{{forloop.counter}}.</span> {{object.subject}}<a class="btn btn-danger btn-sm ml-2" href="{% url 'infolist:delete-subject' object.id %}"><i class="fa fa-trash-o"></i> Remove</a></p>
         </div>
         {% empty %}
             <p>No Subjects Added yet!</p>
