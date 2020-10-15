@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="mt-2 text-center">Pending Information List</h2>
+<a href="{% url 'infolist:list' %}">Back to Info List</a>
+<hr>
+{% for objects,subject in object_list %}
+    <p class="lead">{{subject.subject}}</p>
+    {% for object in objects %}
+    <div class="row">
+        <div class="col-lg-6 col-md-8 col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                <h5 class="card-title">{{object.title}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{subject.subject}}</h6>
+                <p class="card-text">{{object.content|safe}}</p>
+                <a href="{% url 'infolist:approve' object.id %}" class="card-link btn btn-success btn-sm">Approve</a>
+                <a href="{% url 'infolist:delete' object.id %}" class="card-link btn btn-danger btn-sm">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+        {% empty %}
+        <p>No Data for {{subject.subject}}!</p>
+        {% endfor %}
+    {% empty %}
+    <p>No Information Pending Yet!</p>
+    {% endfor %}
+
+{% endblock %}

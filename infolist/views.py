@@ -9,11 +9,13 @@ from .forms import InfoListForm,SubjectForm
 @login_required
 def info_list_display_view(request):
     subjects = Subject.objects.filter(department=request.user.info.department,year=request.user.info.join_year)
-    qs = InfoList.objects.filter(department=request.user.info.department,year=request.user.info.join_year)
+    qs = InfoList.objects.filter(department=request.user.info.department,year=request.user.info.join_year,approved=True)
     data = []
     for i in subjects:
         objects = qs.filter(subject=i)
-        data.append(object)
+        if(objects.count()==0):
+            continue
+        data.append([objects,i])
     return render(request,'infolist/list.html',{'object_list':data})
 
 @login_required
@@ -51,17 +53,48 @@ def info_list_add_view(request):
     if(request.method=='POST'):
         form = InfoListForm(request.POST)
         if(form.is_valid()):
-            form.save(commit=False)
-            form.user = request.user.info
-            form.department = request.user.info.department
-            form.year = request.user.info.join_year
+            instance = form.save(commit=False)
+            instance.user = request.user.info
+            instance.department = request.user.info.department
+            instance.year = request.user.info.join_year
             if(request.user.info.is_cr):
-                form.approved = True
-            form.save()
+                instance.approved = True
+                messages.info(request,"Info has been Added!")
+            else:
+                messages.info(request,"Info will be Added Once Approved by CR!")
+            instance.save()
             return redirect('infolist:list')
     return render(request,'infolist/add-info.html',{'form':form})
 
 
 @login_required
 def info_list_pending_list_view(request):
-    pass
+    subjects = Subject.objects.filter(department=request.user.info.department,year=request.user.info.join_year)
+    qs = InfoList.objects.filter(department=request.user.info.department,year=request.user.info.join_year,approved=False)
+    data = []
+    for i in subjects:
+        objects = qs.filter(subject=i)
+        if(objects.count()==0):
+            continue
+        data.append([objects,i])
+    return render(request,'infolist/pending-list.html',{'object_list':data})
+
+
+@login_required
+def info_list_approve_view(request,id):
+    if(not request.user.info.is_cr):
+        raise PermissionDenied
+    obj = get_object_or_404(InfoList,pk=id)
+    obj.approved = True
+    obj.save()
+    messages.info(request,"Info has Been Approved!")
+    return redirect("infolist:pending")
+
+
+@login_required
+def info_list_delete_view(request,id):
+    obj = get_object_or_404(InfoList,pk=id)
+    if(request.user.info==obj.user or request.user.info.is_cr):
+        obj.delete()
+        return redirect("infolist:list")    
+    raise PermissionDenied
