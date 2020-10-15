@@ -43,3 +43,25 @@ def info_list_delete_subject_view(request,id):
     object.delete()
     messages.success(request,"Subject has Been Deleted!")
     return redirect("infolist:add-subject")
+
+
+@login_required
+def info_list_add_view(request):
+    form = InfoListForm()
+    if(request.method=='POST'):
+        form = InfoListForm(request.POST)
+        if(form.is_valid()):
+            form.save(commit=False)
+            form.user = request.user.info
+            form.department = request.user.info.department
+            form.year = request.user.info.join_year
+            if(request.user.info.is_cr):
+                form.approved = True
+            form.save()
+            return redirect('infolist:list')
+    return render(request,'infolist/add-info.html',{'form':form})
+
+
+@login_required
+def info_list_pending_list_view(request):
+    pass

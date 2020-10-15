@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block head %} {{ form.media }} {% endblock %}
+
+{% block content %}
+<h2 class="mt-2"><i class="fa fa-pencil-square-o"></i> Add Information</h2>
+<div>
+    <div class="row">
+        <div class="col-lg-7 col-md-10 col-sm-12">
+            <form action="{% url 'infolist:add-info' %}" method="post">
+                {% csrf_token %}
+                {{form|crispy}}
+                <input class="btn btn-primary mb-2" type="submit" value="Add">
+            </form>
+        </div>
+    </div>
+</div>
+    
+{% endblock %}
