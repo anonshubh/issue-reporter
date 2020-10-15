@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h2 class="mt-2">Add New Subject</h2>
+<div class="row">
+    <div class="col-lg-6 col-md-8 col-sm-12">
+        <form action="{% url 'infolist:add-subject' %}" method="post">
+            {% csrf_token %}
+            {{form|crispy}}
+            <input class="btn btn-primary" type="submit" value="Add">
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6 col-md-8 col-sm-12">
+        <p class="lead mt-2">Added Subjects</p>
+        {% for object in subjects %}
+        <div>
+            <p><span>{{forloop.counter}}.</span> {{object.subject}}<a class="btn btn-danger btn-sm ml-2" href="">Remove</a></p>
+        </div>
+        {% empty %}
+            <p>No Subjects Added yet!</p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
