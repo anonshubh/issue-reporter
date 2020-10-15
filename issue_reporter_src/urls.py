@@ -24,4 +24,5 @@ urlpatterns = [
     #Local
     path('',include('reporter.urls',namespace='reporter')),
     path('polling/',include('polling.urls',namespace='polling')),
+    path('info-list/',include('infolist.urls',namespace='infolist')),
 ]

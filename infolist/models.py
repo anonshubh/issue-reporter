@@ -4,6 +4,8 @@ from profiles.models import UserInfo
 
 class Subject(models.Model):
     subject = models.CharField(max_length=56)
+    department = models.CharField(max_length=20,blank=True)
+    year = models.CharField(max_length=4,blank=True)
 
     def __str__(self):
         return str(self.subject)
