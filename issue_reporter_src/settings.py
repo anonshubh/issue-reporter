@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'profiles.apps.ProfilesConfig',
     'reporter.apps.ReporterConfig',
     'polling.apps.PollingConfig',
+    'infolist.apps.InfolistConfig',
 ]
 
 
