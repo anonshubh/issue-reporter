@@ -3,6 +3,8 @@
 
 {% block content %}
 <h2 class="mt-2">Add New Subject</h2>
+<a href="{% url 'infolist:list' %}">Back to Info List</a>
+<hr>
 <div class="row">
     <div class="col-lg-6 col-md-8 col-sm-12">
         <form action="{% url 'infolist:add-subject' %}" method="post">

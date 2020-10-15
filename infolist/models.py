@@ -23,3 +23,7 @@ class InfoList(models.Model):
 
     def __str__(self):
         return str(self.title[:30])
+
+    class Meta:
+        ordering = ['-timestamp']
+
