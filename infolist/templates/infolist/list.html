@@ -14,10 +14,25 @@
 {% endif %}
 <hr>
 <h2 class="mt-2 text-center">Information List</h2>
-<div class="row">
-    <div class="col">
-        <!-- table -->
+{% for objects,subject in object_list %}
+    <p class="lead">{{subject.subject}}</p>
+    {% for object in objects %}
+    <div class="row">
+        <div class="col-lg-6 col-md-8 col-sm-12">
+            <div class="card my-2">
+                <div class="card-body">
+                <h5 class="card-title">{{object.title}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{subject.subject}}</h6>
+                <p class="card-text">{{object.content|safe}}</p>
+                {% if request.user.info.is_cr or request.user.info == object.user %}
+                <a href="{% url 'infolist:delete' object.id %}" class="card-link btn btn-danger btn-sm">Delete</a>
+                {% endif %}
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-
+        {% empty %}
+        <p>No Data for {{subject.subject}}!</p>
+        {% endfor %}
+    {% endfor %}
 {% endblock %}
