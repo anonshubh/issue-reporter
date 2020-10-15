@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render,get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.contrib import messages
@@ -35,3 +35,11 @@ def info_list_add_subject_view(request):
             messages.error(request,"Form is Invalid!")
         return redirect('infolist:add-subject')
     return render(request,'infolist/add-subject.html',{'form':form,'subjects':subjects})
+
+
+@login_required
+def info_list_delete_subject_view(request,id):
+    object = get_object_or_404(Subject,pk=id)
+    object.delete()
+    messages.success(request,"Subject has Been Deleted!")
+    return redirect("infolist:add-subject")
