@@ -124,11 +124,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                #Through Reporter Apps
+                #Through Reporter App
                 'reporter.context-processors.pending_issue_list_context',
                 'reporter.context-processors.pending_contact_list_context',
                 'reporter.context-processors.live_polls_count_context',
                 'reporter.context-processors.resolved_issue_list_context',
+                #Through InfoList App
+                'infolist.context-processors.pending_info_list_context',
             ],
         },
     },
