@@ -49,9 +49,9 @@ def info_list_delete_subject_view(request,id):
 
 @login_required
 def info_list_add_view(request):
-    form = InfoListForm()
+    form = InfoListForm(request.user.info.department,request.user.info.join_year)
     if(request.method=='POST'):
-        form = InfoListForm(request.POST)
+        form = InfoListForm(request.user.info.department,request.user.info.join_year,request.POST)
         if(form.is_valid()):
             instance = form.save(commit=False)
             instance.user = request.user.info
