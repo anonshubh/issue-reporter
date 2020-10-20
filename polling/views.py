@@ -20,7 +20,12 @@ def polling_detail_view(request,id):
     if(not object.active):
         raise PermissionDenied
     options = object.options.all()
-    return render(request,'polling/poll-detail.html',{"object":object,'options':options})
+    live_votes = object.result.all().first()
+    if(not live_votes is None):
+        live_votes = live_votes.voted_users.all().count()
+    else:
+        live_votes = 0
+    return render(request,'polling/poll-detail.html',{"object":object,'options':options,'live_voted':live_votes})
 
 
 @login_required
