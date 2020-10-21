@@ -5,27 +5,35 @@
 <h3 class="text-center mt-2">Voted Users</h3>
 <a href="{% url 'reporter:close-stage' %}"><i class="fa fa-arrow-left"></i> Closed Polls</a>
 <hr>
-<p class="lead">Subject: {{issue.title}}</p>
-<p>{{issue.content|safe}}</p>
-<p>Posted on {{issue.timestamp|date:'d-m-Y H:i'}}</p>
-<p>Total Upvotes: {{issue.upvotes|abs}}</p>
-<p>Total Downvotes: {{issue.downvotes|abs}}</p>
-<ul>
-{% for vote in votes %}
-    {% if vote.type != -1 %}
-    <li>
-        <span class="">{{vote.user|upper}}</span>
-        {% if vote.type == 1 %} 
-        <span class=""> Upvoted</span>
-        {% endif %}
-        {% if vote.type == 0 %}
-        <span class=""> Downvoted</span>    
-        {% endif %}
-    </li>
-    {% endif %}
-{% empty %}
-<p>No one Voted on this Issue!</p>
-{% endfor %}
-</ul>
+<div class="card pl-3 pt-3 pr-3 pb-2 mb-3 rounded-sm border-primary border-radius-10">
+    <span>Posted on {{issue.timestamp|date:'d-m-Y H:i'}}<p class="lead text-center font-weight-bold">{{issue.title}}</p></span>
+    <p class="ml-3 ">{{issue.content|safe}}</p>
+    <div class="row">
+        <div class="col-lg-6 col-sm-12 text-center">
+            Total Upvotes: {{issue.upvotes|abs}}
+        </div>
+        <div class="col-lg-6 col-sm-12 text-center">
+            Total Downvotes: {{issue.downvotes|abs}}
+        </div>
+    </div>
+    <p></p>
+    <div class="row">
+    {% for vote in votes %}
+        {% if vote.type != -1 %}
+        <div class="col-lg-6 col-sm-12 text-center">
+            <span class="">{{vote.user|upper}}</span>
+                {% if vote.type == 1 %} 
+                    <span class="text-success"> Upvoted</span>
+                {% endif %}
+                    {% if vote.type == 0 %}
+                    <span class="text-danger"> Downvoted</span>   
+                    {% endif %}
+                {% endif %}
+        </div>
+            {% empty %}
+            <p>No one Voted on this Issue!</p>
+    {% endfor %}
+    </div>
+</div>
 
 {% endblock %}
