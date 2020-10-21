@@ -6,7 +6,7 @@ from .models import Report , ContactList , FeedBack
 class ReportForm(forms.ModelForm):
     class Meta:
         model = Report
-        fields = ['title','content']
+        fields = ['title','content','anonymized']
         widgets = {
             'content':TinyMCE(attrs={'cols': 80, 'rows': 15})
         }

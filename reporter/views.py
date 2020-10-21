@@ -336,5 +336,7 @@ def voted_users(request,id):
     if(not request.user.info.is_cr):
         raise PermissionDenied
     issue_obj = get_object_or_404(Report,pk=id)
+    if(issue_obj.anonymized):
+        raise PermissionDenied
     votes = Vote.objects.filter(issue=issue_obj).order_by('-type')
     return render(request,'reporter/voted-users.html',{'votes':votes,'issue':issue_obj})

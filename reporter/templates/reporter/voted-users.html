@@ -6,7 +6,7 @@
 <a href="{% url 'reporter:close-stage' %}"><i class="fa fa-arrow-left"></i> Closed Polls</a>
 <hr>
 <p class="lead">Subject: {{issue.title}}</p>
-<p>{{issue.content}}</p>
+<p>{{issue.content|safe}}</p>
 <p>Posted on {{issue.timestamp|date:'d-m-Y H:i'}}</p>
 <p>Total Upvotes: {{issue.upvotes|abs}}</p>
 <p>Total Downvotes: {{issue.downvotes|abs}}</p>
