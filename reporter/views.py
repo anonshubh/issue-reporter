@@ -329,3 +329,12 @@ def send_remainder_mail_view(request):
     except:
         messages.warning(request,"Per Day Limit is Exceeded!")
     return redirect("reporter:index")
+
+
+@login_required
+def voted_users(request,id):
+    if(not request.user.info.is_cr):
+        raise PermissionDenied
+    issue_obj = get_object_or_404(Report,pk=id)
+    votes = Vote.objects.filter(issue=issue_obj).order_by('-type')
+    return render(request,'reporter/voted-users.html',{'votes':votes,'issue':issue_obj})

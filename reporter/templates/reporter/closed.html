@@ -14,6 +14,7 @@
           <h5 class="card-title">{{issue.title}}</h5>
           <p class="card-text" >{{issue.content|safe}}</p>
           <p class="card-text">Posted on: {{issue.timestamp|date:'d-m-Y H:i'}}</p>
+          <a class="btn btn-primary btn-sm my-2" href="{% url 'reporter:voted-users' issue.id %}">Voted Users</a>
           {% if issue.cr_line %}
           <p class="card-text resolve-message"><em>Resolved Message: </em><span style="color: black;">{{issue.cr_line}}</span></p>
           <a class="btn btn-dark" href="{% url 'reporter:resolve-line-delete' issue.id %}">Remove Message</a>

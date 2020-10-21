@@ -21,6 +21,7 @@ urlpatterns=[
     path('voted-list/',views.voted_list_view,name='voted-list'),
     path('deadline-add/',views.deadline_add_view,name='add-deadline'),
     path('deadline-remove/<int:pk>',views.deadline_remove_view,name='remove-deadline'),
+    path('voted-list/<int:id>/',views.voted_users,name='voted-users'),
     
     path('contact-list/',views.contactlist_list_view,name='contact-list'),
     path('contact-pending/',views.contactlist_cr_pending_list,name='contact-pending'),

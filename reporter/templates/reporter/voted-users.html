@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load mathfilters %}
+
+{% block content %}
+<h3 class="text-center mt-2">Voted Users</h3>
+<a href="{% url 'reporter:close-stage' %}"><i class="fa fa-arrow-left"></i> Closed Polls</a>
+<hr>
+<p class="lead">Subject: {{issue.title}}</p>
+<p>{{issue.content}}</p>
+<p>Posted on {{issue.timestamp|date:'d-m-Y H:i'}}</p>
+<p>Total Upvotes: {{issue.upvotes|abs}}</p>
+<p>Total Downvotes: {{issue.downvotes|abs}}</p>
+<ul>
+{% for vote in votes %}
+    {% if vote.type != -1 %}
+    <li>
+        <span class="">{{vote.user|upper}}</span>
+        {% if vote.type == 1 %} 
+        <span class=""> Upvoted</span>
+        {% endif %}
+        {% if vote.type == 0 %}
+        <span class=""> Downvoted</span>    
+        {% endif %}
+    </li>
+    {% endif %}
+{% empty %}
+<p>No one Voted on this Issue!</p>
+{% endfor %}
+</ul>
+
+{% endblock %}
