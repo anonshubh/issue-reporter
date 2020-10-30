@@ -4,7 +4,7 @@
 ---
 *Requirements:- Python 3.8+*<br>
 -> Change Current Directory where manage.py exists
-1) `python -m venv env`(First_time_only)
+1) `python -m venv env`
 2) `source env/bin/activate` (Mac/Linux)<br>
    `env/Scripts\activate.ps1` (Windows-Powershell)
 3) `pip install -r requirements.txt`
