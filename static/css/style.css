@@ -12,7 +12,7 @@
 }
 .downvote:hover{
     text-decoration: none;
-    color: white;
+    color: blue;
 }
 .upvoted{
     display: none;
