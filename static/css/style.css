@@ -35,9 +35,9 @@ body{
     background: -webkit-linear-gradient(to right, #A7BFE8, #6190E8);  
     background: linear-gradient(to right, #A7BFE8, #6190E8);  */
 
-    background: #085078;  
-    background: -webkit-linear-gradient(to right, #85D8CE, #085078); 
-    background: linear-gradient(to right, #85D8CE, #085078); 
+    background: #f4f4f2;  
+    background: -webkit-linear-gradient(to right, #bbbfca, #e8e8e8); 
+    background: linear-gradient(to right, #e8e8e8, #f4f4f2); 
 
     /* background-color: #001c3c; */
     
@@ -137,7 +137,7 @@ body{
     background: #fff;
     z-index: -2;
     filter: blur(40px);
-    background: linear-gradient(235deg,#89ff00,#060c21,#00bcd4);
+    background: linear-gradient(235deg,#89ff00,#e6739f,#790c5a);
 }
 
 .statement-card:hover{
@@ -170,7 +170,7 @@ body{
     background: #fff;
     transform:skew(2deg,2deg) ;
     z-index: -1;
-    background: linear-gradient(315deg,#ff0000,#ffc107);
+    background: linear-gradient(315deg,#5eaaa8,#a3d2ca);
 }
 .answer-card::after{
     content: '';
@@ -182,7 +182,7 @@ body{
     background: #fff;
     z-index: -2;
     filter: blur(40px);
-    background: linear-gradient(235deg,#dd020d,#060c21,#f54ad8);
+    background: linear-gradient(235deg,#8fc0a9,#84a9ac,#68b0ab);
 }
 .answer-card:hover{
     background-color:#30002b;
