@@ -320,7 +320,9 @@ def send_remainder_mail_view(request):
     try:
         send_mail(
         'Reminder',
-        'Kindly Vote your Opinion!, if Done ignore this Mail.',
+        """Kindly Vote your Opinion!, if Done ignore this Mail.
+            https://teamezi.herokuapp.com/
+        """,
         settings.DEFAULT_FROM_EMAIL,
         class_list,
         fail_silently=False,
