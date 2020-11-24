@@ -333,8 +333,6 @@ def send_remainder_mail_view(request):
 
 @login_required
 def voted_users(request,id):
-    if(not request.user.info.is_cr):
-        raise PermissionDenied
     issue_obj = get_object_or_404(Report,pk=id)
     if(issue_obj.anonymized):
         raise PermissionDenied
