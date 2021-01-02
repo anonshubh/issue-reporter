@@ -145,6 +145,7 @@ def poll_result_detail(request,id):
         opt_number = 0
         try:
             opt_percent = ((i.count.all().first().count)/total_votes)*100
+            opt_percent = round(opt_number,2)
             opt_number = i.count.all().first().count
         except:
             pass
