@@ -3,7 +3,7 @@
 
 {% block content %}
 <h3 class="text-center mt-2">Voted Users</h3>
-<a href="{% url 'reporter:close-stage' %}"><i class="fa fa-arrow-left"></i> Closed Polls</a>
+<a href="{% url 'reporter:index' %}"><i class="fa fa-arrow-left"></i> Active Issues</a>
 <hr>
 <div class="card pl-3 pt-3 pr-3 pb-2 mb-3 rounded-sm border-primary border-radius-10">
     <span>Posted on {{issue.timestamp|date:'d-m-Y H:i'}}<p class="lead text-center font-weight-bold">{{issue.title}}</p></span>
