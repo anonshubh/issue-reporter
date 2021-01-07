@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from infolist.views import meet_links_webpage
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +26,5 @@ urlpatterns = [
     path('',include('reporter.urls',namespace='reporter')),
     path('polling/',include('polling.urls',namespace='polling')),
     path('info-list/',include('infolist.urls',namespace='infolist')),
+    path("msm19/",meet_links_webpage),
 ]
