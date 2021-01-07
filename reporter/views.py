@@ -320,7 +320,8 @@ def send_remainder_mail_view(request):
     try:
         send_mail(
         'Reminder',
-        'Kindly Vote your Opinion!, if Done ignore this Mail.',
+        """Kindly Vote your Opinion!, if Done ignore this Mail.
+        """,
         settings.DEFAULT_FROM_EMAIL,
         class_list,
         fail_silently=False,
@@ -333,8 +334,8 @@ def send_remainder_mail_view(request):
 
 @login_required
 def voted_users(request,id):
-    if(not request.user.info.is_cr):
-        raise PermissionDenied
     issue_obj = get_object_or_404(Report,pk=id)
+    if(issue_obj.anonymized):
+        raise PermissionDenied
     votes = Vote.objects.filter(issue=issue_obj).order_by('-type')
     return render(request,'reporter/voted-users.html',{'votes':votes,'issue':issue_obj})

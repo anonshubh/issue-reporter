@@ -17,6 +17,7 @@ class Report(models.Model):
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
     deadline = models.DateTimeField(null=True)
+    anonymized = models.BooleanField(default=True,help_text = "CRs don't have Access to Voted Users!")
 
     def __str__(self):
         return f'By {self.user.user.username} ({self.content[:50]})'

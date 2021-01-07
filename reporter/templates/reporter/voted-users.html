@@ -3,24 +3,29 @@
 
 {% block content %}
 <h3 class="text-center mt-2">Voted Users</h3>
-<a href="{% url 'reporter:close-stage' %}"><i class="fa fa-arrow-left"></i> Closed Polls</a>
+<a href="{% url 'reporter:resolved' %}"><i class="fa fa-arrow-left"></i> Resolved Issues</a>
 <hr>
 <div class="card pl-3 pt-3 pr-3 pb-2 mb-3 rounded-sm border-primary border-radius-10">
     <span>Posted on {{issue.timestamp|date:'d-m-Y H:i'}}<p class="lead text-center font-weight-bold">{{issue.title}}</p></span>
     <p class="ml-3 ">{{issue.content|safe}}</p>
-    <!-- <p>Posted on {{issue.timestamp|date:'d-m-Y H:i'}}</p> -->
-    <p class="text-center">Total Upvotes: {{issue.upvotes|abs}} &emsp;&emsp; &ensp;&ensp;Total Downvotes: {{issue.downvotes|abs}}</p>
+    <div class="row">
+        <div class="col-lg-6 col-sm-12 text-center">
+            Total Upvotes: {{issue.upvotes|abs}}
+        </div>
+        <div class="col-lg-6 col-sm-12 text-center">
+            Total Downvotes: {{issue.downvotes|abs}}
+        </div>
+    </div>
     <p></p>
     <div class="row">
     {% for vote in votes %}
         {% if vote.type != -1 %}
         <div class="col-lg-6 col-sm-12 text-center">
+            <span class="">{{vote.user|upper}}</span>
                 {% if vote.type == 1 %} 
-                    <span class="">{{vote.user|upper}}</span>
                     <span class="text-success"> Upvoted</span>
                 {% endif %}
                     {% if vote.type == 0 %}
-                    <span class="">{{vote.user|upper}}</span>
                     <span class="text-danger"> Downvoted</span>   
                     {% endif %}
                 {% endif %}

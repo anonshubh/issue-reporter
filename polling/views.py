@@ -20,12 +20,16 @@ def polling_detail_view(request,id):
     if(not object.active):
         raise PermissionDenied
     options = object.options.all()
+    options_ =  []
+    for i in options:
+        options_.append(i)
+    options_.reverse()
     live_votes = object.result.all().first()
     if(not live_votes is None):
         live_votes = live_votes.voted_users.all().count()
     else:
         live_votes = 0
-    return render(request,'polling/poll-detail.html',{"object":object,'options':options,'live_voted':live_votes})
+    return render(request,'polling/poll-detail.html',{"object":object,'options':options_,'live_voted':live_votes})
 
 
 @login_required
@@ -141,6 +145,7 @@ def poll_result_detail(request,id):
         opt_number = 0
         try:
             opt_percent = ((i.count.all().first().count)/total_votes)*100
+            opt_percent = round(opt_percent,2)
             opt_number = i.count.all().first().count
         except:
             pass
