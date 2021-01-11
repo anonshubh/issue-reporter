@@ -99,6 +99,8 @@ def info_list_delete_view(request,id):
         return redirect("infolist:list")    
     raise PermissionDenied
 
+
 @login_required
 def meet_links_webpage(request):
+    #User Permissions
     return render(request,"infolist/msm19.html")
