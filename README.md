@@ -3,12 +3,14 @@
 **Setup and Run Locally**
 ---
 *Requirements:- Python 3.8+*<br>
--> Change Current Directory where manage.py exists
-1) `python -m venv env`
-2) `source env/bin/activate` (Mac/Linux)<br>
-   `env/Scripts\activate.ps1` (Windows-Powershell)
-3) `pip install -r requirements.txt`
-4) `python manage.py runserver`
+1) `git clone https://github.com/anonshubh/synergee.git`
+(For Developer: Use your Forked URL) 
+2) `cd synergee`
+3) `python -m venv env`
+4) `source env/bin/activate` (Mac/Linux)<br>
+   `env/Scripts/activate.ps1` (Windows-Powershell)
+5) `pip install -r requirements.txt`
+6) `python manage.py runserver`
 
 **For Users**
 1) Test-user is with username as testuser and password as demouser@123
