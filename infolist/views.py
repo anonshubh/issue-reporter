@@ -101,11 +101,9 @@ def info_list_delete_view(request,id):
 
 
 
-@login_required
 def meet_links_webpage(request):
     all_links = MeetLinks.objects.all()
     links = {"links": all_links}
-    print(all_links[0])
     #User Permissions
     return render(request,"infolist/msm19.html", links)
 
