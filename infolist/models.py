@@ -27,3 +27,9 @@ class InfoList(models.Model):
     class Meta:
         ordering = ['-timestamp']
 
+class MeetLinks(models.Model):
+    subject_name = models.CharField(max_length=100,blank=True)
+    subject_url = models.CharField(max_length=100,blank=True)
+
+    def __str__(self):
+        return str(self.subject_name)
