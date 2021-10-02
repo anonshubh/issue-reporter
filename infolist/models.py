@@ -32,4 +32,4 @@ class MeetLinks(models.Model):
     subject_url = models.CharField(max_length=100,blank=True)
 
     def __str__(self):
-        return str(self.subject_name)
+        return str(self.subject_name+(self.subject_url))
