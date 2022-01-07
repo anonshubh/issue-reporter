@@ -3,9 +3,9 @@
 **Setup and Run Locally**
 ---
 *Requirements:- Python 3.8+*<br>
-1) `git clone https://github.com/anonshubh/synergee.git`
+1) `git clone https://github.com/anonshubh/issue-reporter.git`
 (For Developer: Use your Forked URL) 
-2) `cd synergee`
+2) `cd issue-reporter`
 3) `python -m venv env`
 4) `source env/bin/activate` (Mac/Linux)<br>
    `env/Scripts/activate.ps1` (Windows-Powershell)
