@@ -35,7 +35,7 @@ body{
     background: -webkit-linear-gradient(to right, #A7BFE8, #6190E8);  
     background: linear-gradient(to right, #A7BFE8, #6190E8);  */
 
-    background: #085078;  
+    background: #085088;  
     background: -webkit-linear-gradient(to right, #85D8CE, #085078); 
     background: linear-gradient(to right, #85D8CE, #085078); 
 
@@ -99,7 +99,7 @@ body{
     transition: height 0.3s linear,width 0.3s linear 0.3s;
 }
 .c-white{
-    color: #fff;
+    color: #ffffff;
 }
 
 .statement:hover{
@@ -109,7 +109,7 @@ body{
 .statement-card{
     height: 370px;
     width: 310px;
-    background: #060c21;
+    background: #061c21;
     border: 1px solid #000;
     cursor: pointer;
 }
@@ -121,7 +121,7 @@ body{
     left: -2px;
     right: -2px;
     bottom: -2px;
-    background: #fff;
+    background: #ffffff;
     transform:skew(2deg,2deg) ;
     z-index: -1;
     background: linear-gradient(315deg,#89ff00,#00bcd4);
@@ -141,7 +141,7 @@ body{
 }
 
 .statement-card:hover{
-    background-color: rgb(5, 2, 54);
+    background-color: rgb(5, 4, 54);
     
 }
 
